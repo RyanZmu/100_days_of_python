@@ -119,6 +119,41 @@ elif player_direction == "west":
      ''')
         is_game_over = True
 # East
+elif player_direction == 'east':
+    print(f'''
+     Heading {player_direction} you start to feel the ground shake and you notice a tree nearby fall over.
+     
+     Will you investigate what brought down the tree or will you run away? 
+     ''')
+    player_choice: str = input("Investigate or Run?").lower()
+
+    if player_choice == "investigate":
+        print(f'''
+     You run over to find out what made the tree fall over, upon investigating you find a small elf like creature.
+     He seems confused and scared but also nice.
+     
+     Do you ask him to join you or will you tell him to leave your presence?
+      ''')
+        player_choice_elf: str = input("Join or Shoo?").lower()
+        if player_choice_elf == "join":
+            print(f'''
+         The elf jumps up and onto your shoulders, excited and eager to get away from this island.
+         
+         "Hey thanks for the lift buddy!" says the elf.
+         
+         You ask him his name and he stays silent and his eyes droop.
+         
+         "I don't know!"
+          ''')
+        elif player_choice_elf == "shoo":
+            print(f'''
+        You tell the elf where to shove it and he runs off crying.
+        ''')
+    elif player_choice == "run":
+        print('''
+     You run away as fast as you can and while doing so you trip on a rock and snap your neck. Violently.
+         ''')
+        is_game_over = True
 else:
     print('Game Broke! Must have entered an invalid direction! North, South, West or East are valid')
 
