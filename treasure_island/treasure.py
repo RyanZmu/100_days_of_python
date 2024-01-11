@@ -35,6 +35,7 @@ print(f'''
 ''')
 
 # First encounters - nesting a ton of if statements for practice
+# Refactor later on and make this an actual project
 # North
 if player_direction == "north":
     print('''
