@@ -34,7 +34,7 @@ print(f'''
         As you get up, you turn {player_direction} and start to walk briskly.
 ''')
 
-# First encounters
+# First encounters - nesting a ton of if statements for practice
 # North
 if player_direction == "north":
     print('''
