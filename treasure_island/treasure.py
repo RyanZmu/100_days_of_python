@@ -54,6 +54,7 @@ if player_direction == "north":
         is_game_over = True
     else:
         print("Enter a valid option! Fight or Run!")
+
 # South
 elif player_direction == "south":
     print(f'''
@@ -85,6 +86,7 @@ elif player_direction == "south":
         the ledge in front of you and tumble down to your death.
         ''')
         is_game_over = True
+
 # West
 elif player_direction == "west":
     print(f'''
@@ -119,6 +121,7 @@ elif player_direction == "west":
      You run away scared of the humming! In doing so you fall into a small stream and proceed to drown violently.
      ''')
         is_game_over = True
+
 # East
 elif player_direction == 'east':
     print(f'''
