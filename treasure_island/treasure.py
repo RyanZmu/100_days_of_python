@@ -110,7 +110,8 @@ elif player_direction == "west":
         You chose to keep the dog and bring him along, the dog barks and wags his tail and follows you. Now to name it!
         ''')
             dog_name: str = input("What do you name the dog?")
-            print(f"{dog_name} barks excitedly!")
+            print(f'''
+        {dog_name} barks excitedly! ''')
         elif player_choice_dog == 'shoo':
             print('''
         The dog whimpers and runs away! Poor thing.
@@ -147,7 +148,7 @@ elif player_direction == 'east':
          
          You ask him his name and he stays silent and his eyes droop.
          
-         "I don't know!"
+         "I don't know!" he shouts loudly.
           ''')
         elif player_choice_elf == "shoo":
             print(f'''
