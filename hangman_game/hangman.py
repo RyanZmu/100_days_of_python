@@ -12,14 +12,19 @@ word_chosen: str = random.choice(word_list)
 #  Create blank spaces for each letter
 word_as_blanks: list = []
 
+# User score tracking
+guesses_left: int = 6
+
+# Vars for building hangman - start at -1 index so "O" is first char
+hangman_index: int = -1
+build_hangman: str = ""
+
+
 for letter in range(0, len(word_chosen)):
     if word_chosen[letter] != " ":
         word_as_blanks += word_chosen[letter].replace(word_chosen[letter], "_")
     else:
         word_as_blanks += word_chosen[letter].replace(word_chosen[letter], " ")
-
-# User score tracking
-guesses_left: int = 6
 
 
 # Functions
@@ -38,7 +43,8 @@ def add_letter_to_blank(user_guess):
             word_as_blanks[index] = user_guess
 
 
-def check_player_win():
+# Check if player wins or loses, return bool for each check
+def check_win_lose():
     global word_as_blanks, guesses_left
     player_win_check: bool = False
     player_lose_check: bool = False
@@ -49,13 +55,11 @@ def check_player_win():
         player_win_check = True
     elif guesses_left <= 0:
         player_lose_check = True
+
     return player_win_check, player_lose_check
 
 
-hangman_index: int = -1
-build_hangman: str = ""
-
-
+# Build hangman and check if user is correct
 def is_user_correct(user_guess):
     global hangman_index, build_hangman
 
@@ -66,15 +70,15 @@ def is_user_correct(user_guess):
         print(f"Sorry! {user_guess} is not in the word!")
         user_score()
 
+        # If wrong display and build hangman
         hangman_index += 1
-
         if hangman_index <= len(hangman_chars) - 1:
             build_hangman += hangman_chars[hangman_index]
 
             print(build_hangman)
 
 
-# User input for guessing
+# User input for guessing and checks if the game should continue
 def prompt_user():
     global guesses_left
 
@@ -88,8 +92,9 @@ def prompt_user():
         # Update the board
         print("".join(word_as_blanks))
 
-        player_win = check_player_win()[0]
-        player_lose = check_player_win()[1]
+        # Returns a win and lost check
+        player_win = check_win_lose()[0]
+        player_lose = check_win_lose()[1]
 
         # Check for win/lose before giving next prompt
         if player_win:
