@@ -7,8 +7,7 @@ word_list: list = ["balloon", "skyscraper", "bunk", "ice cream"]
 hangman_chars: list = ["O", "|", "\\", "/", "/", "\\"]
 
 # Pick a word randomly and check user input against the word
-# word_chosen: str = random.choice(word_list)
-word_chosen: str = "ice cream"
+word_chosen: str = random.choice(word_list)
 
 #  Create blank spaces for each letter
 word_as_blanks: list = []
@@ -45,10 +44,6 @@ def check_player_win():
     player_lose_check: bool = False
     word_blank_str: str = "".join(word_as_blanks)
 
-    # print(word_blank_str.find("_"))
-
-    # print({"guesses": guesses_left})
-
     # Check if no blank spaces remain
     if word_blank_str.find("_") == -1 and guesses_left > 0:
         player_win_check = True
@@ -56,8 +51,6 @@ def check_player_win():
         player_lose_check = True
     return player_win_check, player_lose_check
 
-
-# print({"check_player_win": check_player_win()})
 
 hangman_index: int = -1
 build_hangman: str = ""
@@ -84,6 +77,7 @@ def is_user_correct(user_guess):
 # User input for guessing
 def prompt_user():
     global guesses_left
+
     # Print the board initially
     print("".join(word_as_blanks))
 
@@ -95,9 +89,7 @@ def prompt_user():
         print("".join(word_as_blanks))
 
         player_win = check_player_win()[0]
-        # print({"player_win": player_win})
         player_lose = check_player_win()[1]
-        # print({"player_lose": player_lose})
 
         # Check for win/lose before giving next prompt
         if player_win:
