@@ -30,7 +30,6 @@ def encrypt(string, shift_amount):
 
     # Get index of letter, move it by shift amount
     for letter in original_message:
-        print(alphabet.index(letter))
         original_index = alphabet.index(letter)
 
         new_index = original_index + shift_amount
@@ -38,11 +37,9 @@ def encrypt(string, shift_amount):
         # If index is greater than len of alphabet, start back at 0 and add from there, not quite right.
         if new_index <= len(alphabet) - 1:
             encrypted_message += alphabet[new_index]
-            print(encrypted_message)
         else:
             new_index = 0 + shift_amount
             encrypted_message += alphabet[new_index]
-            print(encrypted_message)
 
     return encrypted_message
 
@@ -53,7 +50,6 @@ def decrypt(string, shift_amount):
 
     # Get index of letter, move it by shift amount
     for letter in original_message:
-        print(alphabet.index(letter))
         original_index = alphabet.index(letter)
 
         new_index = original_index - shift_amount
@@ -61,12 +57,11 @@ def decrypt(string, shift_amount):
         # If index is greater than len of alphabet, start back at 0 and add from there, not quite right.
         if new_index <= len(alphabet) - 1:
             decrypted_message += alphabet[new_index]
-            print(decrypted_message)
 
     return decrypted_message
 
 
 if user_choice == "encode":
-    encrypt(string=user_string, shift_amount=shift)
+    print(encrypt(string=user_string, shift_amount=shift))
 elif user_choice == "decode":
-    decrypt(string=user_string, shift_amount=shift)
+    print(decrypt(string=user_string, shift_amount=shift))
