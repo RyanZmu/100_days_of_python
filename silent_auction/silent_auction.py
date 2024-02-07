@@ -22,16 +22,14 @@ def highest_bidder(bids):
 
     for index in range(0, len(bids)):
         current_bid: int = bids[index]["bid_amount"]
+        current_bidder: str = bids[index]["name"]
 
         if current_bid > high_bid:
             high_bid = current_bid
-            high_bidder = bids[index]["name"]
+            high_bidder = current_bidder
 
     winner_text: str = f"The highest bidder is {high_bidder}! With a bid of ${high_bid}!"
     return winner_text
-
-
-continue_bid: bool = False
 
 
 def display_inputs():
@@ -49,7 +47,8 @@ def display_inputs():
     if user_continue == "yes":
         continue_auction()
     else:
-        print(highest_bidder(bids=bid_list))
+        winning_bid: str = highest_bidder(bids=bid_list)
+        print(winning_bid)
 
 
 # Display inputs if auction continues
