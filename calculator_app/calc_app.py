@@ -17,6 +17,7 @@ result: int = 0
 
 def calculation(first_int, second_int, operator):
     global result, user_continue
+ 
     match operator:
         case "+":
             result = first_int + second_int
@@ -47,6 +48,7 @@ def calculation(first_int, second_int, operator):
 
 def user_inputs():
     global result
+ 
     if not user_continue:
         first_number: int = int(input("What is the first number?\n"))
         print(operators)
