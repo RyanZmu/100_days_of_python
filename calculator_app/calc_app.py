@@ -48,15 +48,15 @@ def calculation(first_int, second_int, operator):
 def user_inputs():
     global result
     if not user_continue:
-        first_number: int = int(input("What is the first number?\n"))
+        first_number: float = float(input("What is the first number?\n"))
         print(operators)
         operator_requested: str = input("Pick an operation\n")
-        second_number: int = int(input("What is the second number?\n"))
+        second_number: float = float(input("What is the second number?\n"))
 
         calculation(first_int=first_number, second_int=second_number, operator=operator_requested)
     else:
         operator_requested: str = input("Pick an operation\n")
-        second_number: int = int(input("What is the second number?\n"))
+        second_number: float = float(input("What is the second number?\n"))
 
         calculation(first_int=result, second_int=second_number, operator=operator_requested)
 
