@@ -57,6 +57,7 @@ Psuedo:
 DECK_OF_CARDS = deck.DECK_OF_CARDS
 
 end_game: bool = False
+first_draw: bool = True
 player_hand: dict = {'cards_in_hand': [], 'value': 0, 'chips': 5000}
 dealer_hand: dict = {'cards_in_hand': [], 'value': 0}
 
@@ -96,13 +97,17 @@ def blackjack_check(hand_to_check,name):
 
 
 def blackjack_game():
-    global end_game
+    global end_game, first_draw
+    print({'end_game': end_game})
 
-    if not end_game:
         # Init card draws for player
-        draw_card(hand=player_hand,name='player')
-        draw_card(hand=dealer_hand,name='dealer')
-        
+    if not end_game:
+
+        if first_draw:
+            draw_card(hand=player_hand,name='player')
+            draw_card(hand=dealer_hand,name='dealer')
+            first_draw = False
+
         player_prompt: str = input(f"Your hand: {player_hand['cards_in_hand']} for a total of {player_hand['value']}\n"\
                                    f"Dealer hand: {dealer_hand['cards_in_hand']} for a total of {dealer_hand['value']}\n"\
                                    f"You have a total of {player_hand['chips']} chips\n"\
@@ -110,14 +115,22 @@ def blackjack_game():
     
         if player_prompt.lower() == 'hit':
             draw_card(hand=player_hand,name='player')
-            if not end_game:
+            if not end_game and dealer_hand['value'] < 17:
                 draw_card(hand=dealer_hand,name='dealer')
-        elif player_prompt.lower() == 'stand':
+        elif player_prompt.lower() == 'stand' and dealer_hand['value'] < 17:
             draw_card(hand=dealer_hand,name='dealer')
+        elif dealer_hand['value'] > 17 and player_prompt.lower() == 'stand' and player_hand['value'] > dealer_hand['value']:
+            end_game = True
+            print('PLAYER WINS!')
+        elif player_prompt.lower() == 'stand' and dealer_hand['value'] < player_hand['value']:
+            end_game = True
+            print("PLAYER WINS!")
+        elif dealer_hand['value'] == player_hand['value']:
+           end_game= True
+           print('DEALER PUSH!')
     else:
        return
     
 
 while not end_game:
-    print(end_game)
     blackjack_game()
