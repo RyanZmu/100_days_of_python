@@ -102,6 +102,7 @@ def blackjack_game():
         # Init card draws for player
         draw_card(hand=player_hand,name='player')
         draw_card(hand=dealer_hand,name='dealer')
+        
         player_prompt: str = input(f"Your hand: {player_hand['cards_in_hand']} for a total of {player_hand['value']}\n"\
                                    f"Dealer hand: {dealer_hand['cards_in_hand']} for a total of {dealer_hand['value']}\n"\
                                    f"You have a total of {player_hand['chips']} chips\n"\
