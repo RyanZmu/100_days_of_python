@@ -1,4 +1,5 @@
 import random
+
 """
 Create a Blackjack Game
 
@@ -29,11 +30,10 @@ Psuedo:
 - 3rd: Stretch - Betting and Chip Storage
 """
 
-
 deck_of_cards: list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 'King', 'Queen', 'Jack']
 card_suits: list = ['Spades', 'Clubs', 'Hearts', 'Diamonds']
 continue_game: bool = True
-player_hand: list = [] 
+player_hand: list = []
 dealer_hand: list = []
 
 
@@ -44,24 +44,25 @@ def draw_card():
     card_drawn: dict = {'suit': card_suits[suit_index], 'value': deck_of_cards[card_index]}
     return card_drawn
 
+
 def check_blackjack(hand):
     print({'hand': hand})
-    BLACKJACK: int = 21
+    blackjack: int = 21
     blackjack_or_bust: str = ""
 
     hand_value: int = 0
     # dealer_value: int = 0
 
     for card in range(0, len(hand)):
-        if type(hand[card]['value']) is int :
+        if type(hand[card]['value']) is int:
             hand_value += hand[card]['value']
         else:
             # 10 because if it's a str, it means it is a king,queen or jack
             hand_value += 10
 
     if hand_value == 21:
-        print('BLACKJACK!')
-        blackjack_or_bust = 'BLACKJACK!'
+        print('blackjack!')
+        blackjack_or_bust = 'blackjack!'
 
         # continue_game = False
 
@@ -129,8 +130,10 @@ def blackjack_game():
     print({'player_total_value': player_total_value})
     print({'dealer_total_value': dealer_total_value})
 
-    if player_check != 'BUST!' or dealer_check != 'BUST!':
-        action_text: str = input(f'Your Hand is {player_formatted} for a total of {str(player_total_value)}\nThe Dealer\'s Hand is {dealer_formatted} for a total of {str(dealer_total_value)}\nHit or Stand? \n')
+    if continue_game:
+        action_text: str = input(
+            f'Your Hand is {player_formatted} for a total of {str(player_total_value)}\n'
+            f'The Dealer\'s Hand is {dealer_formatted} for a total of {str(dealer_total_value)}\nHit or Stand? \n')
         player_action(action_text)
     elif player_check == 'BLACKJACK!':
         continue_game = False
