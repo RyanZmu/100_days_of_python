@@ -76,6 +76,5 @@ class MoneyMachine:
             table.field_names = ["Item","Total","Paid","Change Due"]
             table.add_row([coffee_bought.name,f'${coffee_bought.cost}',f'${total_money_given}',f'${change_due}'])
             print(table)
-
         return payment_made
     

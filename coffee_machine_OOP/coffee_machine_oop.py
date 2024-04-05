@@ -43,7 +43,7 @@ def machine_prompts():
 
 def orderCoffee(coffee_ordered):
     # Find coffee user requested
-    coffee_order= menu.orderCoffee(coffee_ordered)
+    coffee_order = menu.orderCoffee(coffee_ordered)
 
     # Work out asking for payment
     if coffee_order != None:
@@ -72,5 +72,5 @@ def machine_off():
 
 
 # initial prompt
-# while machine_on:
-machine_prompts()
+while machine_on:
+    machine_prompts()
