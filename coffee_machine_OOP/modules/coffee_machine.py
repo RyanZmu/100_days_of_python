@@ -1,6 +1,5 @@
 import sys
 from prettytable import PrettyTable
-# from modules.money_machine import MoneyMachine
 
 class CoffeeMachine:
     def __init__(self) -> None:

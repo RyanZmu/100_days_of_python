@@ -32,3 +32,4 @@ class Menu:
                 return coffeeOrdered
 
         print("Sorry that is not available!")
+        return

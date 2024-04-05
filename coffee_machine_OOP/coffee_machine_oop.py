@@ -10,8 +10,7 @@ Make each into modules, bring all modules into this page and make a coffee_maker
 5. Make Coffee
 
 """
-import sys
-from modules.menu import Menu, MenuItem
+from modules.menu import Menu
 from modules.coffee_machine import CoffeeMachine
 from modules.money_machine import MoneyMachine
 
@@ -56,7 +55,8 @@ def orderCoffee(coffee_ordered):
         # Confirm transaction success and resouces are available, brew coffee.
         if coffee_transaction and coffee.makeCoffee(coffee_order):
             print(f"Pouring your {coffee_order.name} coffee!")
-        
+    return
+
 
 def getReport():
     #  get a report of machine resources
