@@ -21,7 +21,7 @@ class Menu:
     def getAllItems(self):
         coffees = ""
         for item in self.menuItems:
-            coffees += f"{item.name} ${item.cost}/ "
+            coffees += f"{item.name} ${item.cost}\n "
         return coffees
 
 
@@ -30,8 +30,5 @@ class Menu:
             if item.name == coffee_type:
                 coffeeOrdered = item
                 return coffeeOrdered
-        print("Sorry that is not available!")
-        
 
-# print(Menu().getAllItems())
-# print(Menu().orderCoffee('latte'))
+        print("Sorry that is not available!")

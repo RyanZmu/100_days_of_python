@@ -13,11 +13,14 @@ Make each into modules, bring all modules into this page and make a coffee_maker
 import sys
 from modules.menu import Menu, MenuItem
 from modules.coffee_machine import CoffeeMachine
+from modules.money_machine import MoneyMachine
 
 # Create classes
 menu = Menu()
 coffee = CoffeeMachine()
+payment_processing = MoneyMachine()
 
+# Track so if False, will stop prompting user
 machine_on: bool = True
 
 
@@ -32,25 +35,40 @@ def machine_prompts():
     if coffee_desired == 'off':
         machine_on = False
         machine_off()
-
-    orderCoffee(coffee_ordered=coffee_desired)
+    elif coffee_desired == 'report':
+        getReport()
+    else:
+        orderCoffee(coffee_ordered=coffee_desired)
+    return
 
 
 def orderCoffee(coffee_ordered):
-    global menu, coffee
-
     # Find coffee user requested
     coffee_order= menu.orderCoffee(coffee_ordered)
 
-    # Make coffee
-    if coffee_order:
-        coffee.makeCoffee(coffee_order)
+    # Work out asking for payment
+    if coffee_order != None:
+        payment = input(f'Payment owed ${coffee_order.cost} \n Please enter coin amounts in following order with commas [Q,D,N] \n')
+        
+        # Process transaction via Money Machine module - this assumes user followed q,d,n format correctly
+        coffee_transaction = payment_processing.transaction(coffee_bought=coffee_order,payment=payment)
+
+        # Confirm transaction success and resouces are available, brew coffee.
+        if coffee_transaction and coffee.makeCoffee(coffee_order):
+            print(f"Pouring your {coffee_order.name} coffee!")
         
 
-# For vending machine workers!
+def getReport():
+    #  get a report of machine resources
+    resources_report = coffee.reportResources()
+    print(resources_report)
+    return 
+
+
+# For vending machine maintainance!
 def machine_off():
-    print("Shut off override activated! Powering down...")
-    sys.exit()
+    coffee.machine_shutdown()
+    return
 
 
 # initial prompt
