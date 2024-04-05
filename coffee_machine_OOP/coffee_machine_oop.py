@@ -72,5 +72,5 @@ def machine_off():
 
 
 # initial prompt
-while machine_on:
-    machine_prompts()
+# while machine_on:
+machine_prompts()
