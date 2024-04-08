@@ -17,19 +17,13 @@ class MoneyMachine:
 
         # Split coin values
         payment = payment.split(",")
-        print({'payment_split': payment})
 
         # Format coins given
         formated_payment = []
         for coins in payment:
-            print(coins)
             formated_payment.append(coins)
 
         total_money_given = int(formated_payment[0]) * self.coin_values['quarters'] + int(formated_payment[1]) * self.coin_values['dimes'] + int(formated_payment[2]) * self.coin_values['nickels']
-        print({'total_money':total_money_given})
-
-
-        print({'formatted_payment':formated_payment})
 
         # check if enough money was given
         if total_money_given < coffee_bought.cost:
