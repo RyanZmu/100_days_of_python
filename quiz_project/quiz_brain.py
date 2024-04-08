@@ -21,7 +21,7 @@ class QuizBrain:
     def check_answer(self, correct_answer, user_answer):
         if user_answer.lower() == correct_answer.lower():
             self.score += 1
-            print(f"Correct!\nThe Answer Was: {correct_answer}\nScore: {self.score}/{self.question_number}")
+            print(f"Correct!\nThe Answer Was: {correct_answer}\nScore: {self.score}/{self.question_number}\n")
         else:
-            print(f"Sorry, that was incorrect!\nThe Answer Was: {correct_answer}\nScore: {self.score}/{self.question_number}")
+            print(f"Sorry, that was incorrect!\nThe Answer Was: {correct_answer}\nScore: {self.score}/{self.question_number}\n")
         return user_answer
