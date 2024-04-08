@@ -46,7 +46,7 @@ def orderCoffee(coffee_ordered):
     coffee_order = menu.orderCoffee(coffee_ordered)
 
     # Work out asking for payment
-    if coffee_order != None:
+    if coffee_order is not None:
         payment = input(f'Payment owed ${coffee_order.cost} \n Please enter coin amounts in following order with commas [Q,D,N] \n')
 
         # Process transaction via Money Machine module - this assumes user followed q,d,n format correctly
