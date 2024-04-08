@@ -2,12 +2,6 @@ from prettytable import PrettyTable
 
 class MoneyMachine:
     def __init__(self) -> None:
-        self.available_change = {
-            'quarters': 50,
-            'dimes': 50,
-            'nickels': 50,
-        }
-
         self.coin_values = {
             'quarters': .25,
             'dimes': .10,
@@ -32,9 +26,7 @@ class MoneyMachine:
             formated_payment.append(coins)
 
         total_money_given = int(formated_payment[0]) * self.coin_values['quarters'] + int(formated_payment[1]) * self.coin_values['dimes'] + int(formated_payment[2]) * self.coin_values['nickels']
-        available_change = self.available_change['quarters'] * self.coin_values['quarters'] + self.available_change['dimes'] * self.coin_values['dimes'] + self.available_change['nickels'] * self.coin_values['nickels']
         print({'total_money':total_money_given})
-        print({'available_change': available_change})
 
 
         print({'formatted_payment':formated_payment})
