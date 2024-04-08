@@ -13,7 +13,7 @@ class CoffeeMachine:
 
 
     def makeCoffee(self, coffee_type):
-        if coffee_type != None:
+        if coffee_type is not None:
             if coffee_type.ingredents['water'] > self.resources['water']:
                 self.canMakeCoffee = False
                 print('Not enough water!')

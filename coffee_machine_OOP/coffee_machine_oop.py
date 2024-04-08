@@ -48,7 +48,7 @@ def orderCoffee(coffee_ordered):
     # Work out asking for payment
     if coffee_order != None:
         payment = input(f'Payment owed ${coffee_order.cost} \n Please enter coin amounts in following order with commas [Q,D,N] \n')
-        
+
         # Process transaction via Money Machine module - this assumes user followed q,d,n format correctly
         coffee_transaction = payment_processing.transaction(coffee_bought=coffee_order,payment=payment)
 
@@ -62,7 +62,7 @@ def getReport():
     #  get a report of machine resources
     resources_report = coffee.reportResources()
     print(resources_report)
-    return 
+    return
 
 
 # For vending machine maintainance!

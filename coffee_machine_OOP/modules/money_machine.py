@@ -52,21 +52,13 @@ class MoneyMachine:
             # Process Change
             change_due = round(total_money_given - coffee_bought.cost, 2)
 
-            # Logic here for removing coins for change, stretch goal outside of project parameters
-
-            if change_due > available_change:
-                payment_made = False
-                print("Sorry not enough available change for this transaction! Please try giving fewer coins")
-                return
-
         # If exact, process transaction
         if total_money_given == coffee_bought.cost:
             payment_made = True
-            
+
         # Create reciept when payment is made
         if payment_made:
             table.field_names = ["Item","Total","Paid","Change Due"]
             table.add_row([coffee_bought.name,f'${coffee_bought.cost}',f'${total_money_given}',f'${change_due}'])
             print(table)
         return payment_made
-    
