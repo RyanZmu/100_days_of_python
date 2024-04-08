@@ -15,12 +15,6 @@ class QuizBrain:
 
 
     def still_has_questions(self):
-        # question_list_count = len(self.question_list)
-        # if self.question_number > question_list_count:
-        #     print(question_list_count)
-        #     self.still_has_questions = False
-
-        # Instead of having all of the above code, just have the return value be a boolean
         return self.question_number < len(self.question_list)
 
 
