@@ -92,11 +92,11 @@ def race(turtle):
     global race_finished
 
     # Get xcoords and color
-    turtle_pos = turtle.xcor()
+    turtle_pos_x = turtle.xcor()
     current_turtle_color = turtle.pen()["pencolor"]
 
     # Check if at screen end and output winner
-    if turtle_pos >= screen_max_x:
+    if turtle_pos_x >= screen_max_x:
         race_finished = True
         if player_input.lower() == current_turtle_color:
             finish_sign.write(f"You Win! The {current_turtle_color} turtle Won", align="center")
