@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestArgs": [
+        "coffee_machine_OOP"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
