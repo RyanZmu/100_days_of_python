@@ -98,10 +98,12 @@ def race(turtle):
     # Check if at screen end and output winner
     if turtle_pos_x >= screen_max_x:
         race_finished = True
+        # Outputs
         if player_input.lower() == current_turtle_color:
             finish_sign.write(f"You Win! The {current_turtle_color} turtle Won", align="center")
         else:
             finish_sign.write(f"You Lose! The {current_turtle_color} turtle Won", align="center")
+
     else:
         turtle.forward(10)
     return
