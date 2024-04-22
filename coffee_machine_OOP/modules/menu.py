@@ -17,7 +17,7 @@ class Menu:
             MenuItem(type_of_coffee="espresso", cost=4.50, water=80, milk=100, coffee=110),
         ]
 
-    
+
     def getAllItems(self):
         coffees = ""
         for item in self.menuItems:
