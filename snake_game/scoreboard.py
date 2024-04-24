@@ -18,4 +18,4 @@ class ScoreBoard():
 
     def game_over(self):
         self.board.clear()
-        self.board.write(arg="You Lose!", font=(10))
+        self.board.write(arg=f"You Lose! Final Score: {self.score}", font=(10))
