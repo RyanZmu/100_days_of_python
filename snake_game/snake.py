@@ -1,39 +1,52 @@
 from turtle import Turtle
+STARTING_POSITIONS = [(0,0), (-20,0), (-40,0)]
+MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+MAX_X = 900
+MAX_Y = -900
 
 class Snake():
     def __init__(self):
-        self.snake = Turtle()
-        self.snake.color("white")
-        self.snake.speed(0)
-        self.snake.penup()
-        self.current_coords = self.snake.pos()
-        self.snake.shape("square")
+        self.segments = []
+        self.create_snake()
+        self.head = self.segments[0]
+
+    def create_snake(self):
+        for position in STARTING_POSITIONS:
+            new_segment = Turtle("square")
+            new_segment.color("white")
+            new_segment.penup()
+            new_segment.goto(position)
+            self.segments.append(new_segment)
 
 
-    def move_forward(self):
-        self.snake.forward(25)
-        self.current_coords = self.snake.pos()
+    def move(self):
+        # Range, start at end, go to first index, -1 each step
+        for seg_num in range(len(self.segments) -1, 0, -1):
+            new_x = self.segments[seg_num - 1].xcor()
+            new_y = self.segments[seg_num - 1].ycor()
+            self.segments[seg_num].goto(new_x, new_y)
+        self.head.forward(MOVE_DISTANCE)
 
 
-    # 90
-    def turn_up(self):
-        self.snake.setheading(90)
-        self.current_coords = self.snake.pos()
+    def up(self):
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
 
 
-    # 270
-    def turn_down(self):
-        self.snake.setheading(270)
-        self.current_coords = self.snake.pos()
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
 
 
-    # 0
-    def turn_right(self):
-        self.snake.setheading(0)
-        self.current_coords = self.snake.pos()
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
 
 
-    # 180
-    def turn_left(self):
-        self.snake.setheading(180)
-        self.current_coords = self.snake.pos()
+    def right(self):
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
