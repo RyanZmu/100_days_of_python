@@ -50,18 +50,16 @@ while game_active:
 
     # Set a tolerance so the snake doesn't need to be exactly over the food piece
     dist_tolerance = 15
+
     # Check if snake eats food
     if snake.head.distance(food) <= dist_tolerance:
         food.create_food()
         snake.extend()
         scoreboard.add_score()
 
-    # Check for body collisions
-    for seg in snake.segments:
-        print(seg.pos())
-        if seg == snake.head:
-            pass
-        elif snake.head.distance(seg) < 10:
+    # Check for body collisions - skipping index 0
+    for seg in snake.segments[1:]:
+        if snake.head.distance(seg) < 10:
             scoreboard.game_over()
             game_active= False
 
