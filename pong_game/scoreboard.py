@@ -1,5 +1,11 @@
 from turtle import Turtle
 
+# Screen boundaries
+MAX_X = 400
+MIN_X = -400
+MAX_Y = 400
+MIN_Y = -400
+
 class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()

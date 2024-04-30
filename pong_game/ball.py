@@ -31,7 +31,7 @@ class Ball(Turtle):
 
     def bounce(self):
         current_heading = self.heading()
-        self.setheading(current_heading-60)
+        self.setheading(current_heading + 45)
         self.forward(5)
         print(current_heading)
         print("bounce")

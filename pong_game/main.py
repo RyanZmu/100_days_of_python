@@ -12,7 +12,6 @@ from random import randint
 screen = Screen()
 screen.setup(width=900, height=900)
 screen.bgcolor("black")
-# screen.tracer(0,0)
 
 # Screen boundaries
 MAX_X = 400
@@ -57,16 +56,17 @@ game_active = True
 
 # Keys
 screen.listen()
-screen.onkeypress(paddle_1.move_up, "Up")
-screen.onkeypress(paddle_1.move_down, "Down")
+screen.onkey(paddle_1.move_up, "Up")
+screen.onkey(paddle_1.move_down, "Down")
 
 # Create Ball
 pong_ball = Ball()
 
-# Make ball and paddle_2 move
-while game_active:
+
+def pong_game():
     # Move ball if not out of bounds
     pong_ball.ball_check()
+    screen.delay(3)
     paddle_2.cpu_player(pong_ball)
 
     # Determine if paddle was hit
@@ -80,6 +80,9 @@ while game_active:
         score_1.increase_score()
     elif pong_ball.xcor() < MIN_X:
         score_2.increase_score()
+\
+while game_active:
+    pong_game()
 
-# screen.update()
+
 screen.exitonclick()
