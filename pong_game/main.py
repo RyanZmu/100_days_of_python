@@ -62,10 +62,9 @@ screen.onkey(paddle_1.move_down, "Down")
 # Create Ball
 pong_ball = Ball()
 
-screen.tracer(0)
+
 while game_active:
     # Move ball if not out of bounds
-    screen.update()
     pong_ball.ball_check()
     screen.delay(3)
     paddle_2.cpu_player(pong_ball)
