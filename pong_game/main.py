@@ -62,9 +62,10 @@ screen.onkey(paddle_1.move_down, "Down")
 # Create Ball
 pong_ball = Ball()
 
-
-def pong_game():
+screen.tracer(0)
+while game_active:
     # Move ball if not out of bounds
+    screen.update()
     pong_ball.ball_check()
     screen.delay(3)
     paddle_2.cpu_player(pong_ball)
@@ -80,9 +81,6 @@ def pong_game():
         score_1.increase_score()
     elif pong_ball.xcor() < MIN_X:
         score_2.increase_score()
-\
-while game_active:
-    pong_game()
 
 
 screen.exitonclick()
