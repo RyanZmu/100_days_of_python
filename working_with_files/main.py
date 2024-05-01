@@ -19,9 +19,9 @@ for guest in invited_guests:
 # Write names to the file and move to ReadyToSend
 for guest in formatted_list:
     # Open and read the content of starting letter, save to var
-    with open(file="working_with_files/birthday_card/Input/Letters/starting_letter.txt", mode="r") as letter:
+    with open(file="./working_with_files/birthday_card/Input/Letters/starting_letter.txt", mode="r") as letter:
         line_to_replace = letter.read()
 
     # Open and replace name in var with guest name, save as a new text file
-    with open(file=f"working_with_files/birthday_card/Output/ReadyToSend/invite_{guest}.txt", mode="w") as invite:
+    with open(file=f"./working_with_files/birthday_card/Output/ReadyToSend/invite_{guest}.txt", mode="w") as invite:
         invite.write(line_to_replace.replace("[name]", guest))
