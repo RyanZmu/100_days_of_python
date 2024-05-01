@@ -30,8 +30,9 @@ class ScoreBoard():
         if self.score > self.high_score:
             self.high_score = self.score
 
-        with open(file="./snake_game/high_scores", mode="w") as hs_file:
-            hs_file.write(f"{self.high_score}")
+            # Update high score file
+            with open(file="./snake_game/high_scores", mode="w") as hs_file:
+                hs_file.write(f"{self.high_score}")
 
         # Reset score
         self.score = 0
