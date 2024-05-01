@@ -30,21 +30,19 @@ class Cars():
             car.color(choice(colors))
 
             # Spawn car off screen in a random y coord and append to cars []
-            car.teleport(x= randint(MIN_X, MAX_X), y=randint(MIN_Y, MAX_Y))
+            car.teleport(x=randint(MIN_X, MAX_X), y=randint(MIN_Y, MAX_Y))
             self.cars.append(car)
-
-        print(self.cars)
 
 
     def move_cars(self, player):
         for car in self.cars:
             if car.xcor() > MIN_X:
-                car.goto(x= car.xcor()-self.current_speed, y= car.ycor())
+                car.goto(x=car.xcor() - self.current_speed, y=car.ycor())
             else:
-                car.teleport(x= MAX_X, y=randint(MIN_Y, MAX_Y))
+                car.teleport(x=MAX_X, y=randint(MIN_Y, MAX_Y))
 
             # Check for collisions each loop
-            self.check_collision(car, player)
+            self.check_collision(car=car, player=player)
 
 
     def check_collision(self, car, player):

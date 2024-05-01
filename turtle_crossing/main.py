@@ -47,12 +47,12 @@ screen.onkey(fun=player.move_right, key= "Right")
 
 
 while game_active:
-    # If no crash, keep cars moving
+    # If no crash, keep cars moving - pass in player for collision checks
     if car.crashed:
         scoreboard.game_over()
         game_active = False
     else:
-        car.move_cars(player)
+        car.move_cars(player=player)
 
     # If player gets to the top, increase level and speed of cars
     if player.ycor() > 380:
