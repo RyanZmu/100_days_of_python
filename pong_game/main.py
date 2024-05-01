@@ -35,7 +35,7 @@ while i<50:
     dividing_line.forward(10)
     dividing_line.pendown()
     i+=1
-
+screen.update()
 # Set up scoreboards - move then display
 score_1 = Scoreboard()
 score_1.teleport(-30, MAX_Y)
