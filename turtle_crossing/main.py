@@ -8,8 +8,6 @@ Navigate the turtle to the other side of the street
 - Randomly generate cars across the screen
 - Start at level 1 and increase speed of cars with each level increase
 - Game over when hit - Reset levels and speeds
-
-
 """
 from turtle import Screen
 from car import Cars

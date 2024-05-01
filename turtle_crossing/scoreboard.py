@@ -11,6 +11,7 @@ class ScoreBoard(Turtle):
 
 
     def update_board(self):
+        self.clear()
         self.write(f"LEVEL: {self.level}")
 
 

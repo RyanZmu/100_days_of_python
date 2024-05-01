@@ -9,11 +9,10 @@ MIN_Y = -300
 
 class Cars():
     def __init__(self):
-        super().__init__()
         self.cars = []
-        self.create_cars()
         self.crashed = False
         self.current_speed = 0.2
+        self.create_cars()
 
 
     def create_cars(self):
@@ -43,6 +42,8 @@ class Cars():
                 car.goto(x= car.xcor()-self.current_speed, y= car.ycor())
             else:
                 car.teleport(x= MAX_X, y=randint(MIN_Y, MAX_Y))
+
+            # Check for collisions each loop
             self.check_collision(car, player)
 
 
