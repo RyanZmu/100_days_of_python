@@ -1,20 +1,27 @@
-# Reading a file - using open directly means you have to close it as well, see below for alternative
-# file = open(file="working_with_files/my_file.txt")
-# contents = file.read()
-# print(contents)
-# file.close()
+"""
+Birthday invite challenge
+- Create invites for each name in the invited_names file
+- Move the completed invites to ReadyToSend
+"""
 
-# Opening a file with the with method instead to avoid needing file.close()
-with open(file="working_with_files/my_file.txt") as new_file:
-    new_contents = new_file.read()
-    print(new_contents)
+# Create a variable of invited guests - readline to make into a list of names
+with open(file="./working_with_files/birthday_card/Input/Names/invited_names.txt") as invited_file:
+    invited_guests = invited_file.readlines()
 
 
-# Writing to a file - use mode, a = append
-with open(file="working_with_files/my_file.txt", mode="a") as file:
-    file.write("\n New Text")
-    
-    
-# If opening a file in write mode when it does not exist, will create the file
-with open(file="working_with_files/new_file.txt", mode="w") as file:
-    file.write("New File!")
+# Format the list to remove \n and any white spaces left over
+formatted_list = []
+for guest in invited_guests:
+    formatted_guest = guest.replace("\n", "").strip()
+    formatted_list.append(formatted_guest)
+
+
+# Write names to the file and move to ReadyToSend
+for guest in formatted_list:
+    # Open and read the content of starting letter, save to var
+    with open(file="working_with_files/birthday_card/Input/Letters/starting_letter.txt", mode="r") as letter:
+        line_to_replace = letter.read()
+
+    # Open and replace name in var with guest name, save as a new text file
+    with open(file=f"working_with_files/birthday_card/Output/ReadyToSend/invite_{guest}.txt", mode="w") as invite:
+        invite.write(line_to_replace.replace("[name]", guest))
