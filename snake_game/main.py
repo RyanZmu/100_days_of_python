@@ -60,13 +60,15 @@ while game_active:
     # Check for body collisions - skipping index 0
     for seg in snake.segments[1:]:
         if snake.head.distance(seg) < 10:
-            scoreboard.game_over()
-            game_active= False
+            scoreboard.reset()
+            snake.reset()
+            # game_active= False
 
     # Check if snake hits a wall
     if snake.head.xcor() >= MAX_X or snake.head.xcor() <= MIN_X or snake.head.ycor() <= MAX_Y or snake.head.ycor() >= MIN_Y:
-        game_active = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
+        # game_active = False
 
 
 screen.exitonclick()
