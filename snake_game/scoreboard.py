@@ -1,14 +1,14 @@
 from turtle import Turtle
 
 # Read high score and set to a variable
-with open(file="./snake_game/high_scores", mode="r") as hs_file:
-    high_score = int(hs_file.read())
+
 
 class ScoreBoard():
     def __init__(self) -> None:
         self.board = Turtle()
         self.board.color("white")
-        self.high_score = high_score
+        with open(file="./snake_game/high_scores", mode="r") as hs_file:
+            self.high_score = int(hs_file.read())
         self.score = 0
         self.board.pensize(40)
         self.board.hideturtle()
