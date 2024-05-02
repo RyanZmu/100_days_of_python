@@ -29,7 +29,7 @@ CSV weather data exercise
 import pandas
 
 # Read csv in one line
-data = pandas.read_csv(filepath_or_buffer="csv_map_usa_game/weather_data.csv")
+data = pandas.read_csv(filepath_or_buffer="./csv_map_usa_game/weather/data/weather_data.csv")
 
 print(data)
 print(data["temp"])
@@ -96,5 +96,5 @@ student_data = pandas.DataFrame(data_dict)
 print(student_data)
 
 # Create a CSV with the data above
-student_data.to_csv("new_csv.csv")
+student_data.to_csv("./csv_map_usa_game/weather/data/new_csv.csv")
 
