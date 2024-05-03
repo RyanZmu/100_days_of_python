@@ -3,7 +3,7 @@ USA Map Game
 
 - Using data from a csv file to fill in the state names and locations.
 - User inputs state names and if correct will be added to map
-- Wins if they can name all 50 states
+- Win if can name all 50 states
 """
 import pandas
 from turtle import Screen, Turtle
@@ -23,33 +23,54 @@ print(state_names)
 
 # Create var to track amount of states guessed
 states_guessed = []
+states_not_guessed = state_names.tolist()
 
 
 while len(states_guessed) < 50:
-    # Input
-   player_guess = screen.textinput(title="50 States Game!", prompt="Name a state!").lower()
-   print(player_guess)
+   # Input
+    player_guess = screen.textinput(title="50 States Game!", prompt="Name a state!\nType 'Exit' to quit and save a copy of all states that you didn't guess!").lower()
+    print(player_guess)
 
-    # Check if guess is correct
-   for state in state_names:
-    if state.lower() == player_guess:
-        print(state.lower())
-        print("That's a state!")
-        states_guessed.append(state)
+    if player_guess != "exit":
+        # Check if guess is correct
+        for state in state_names:
+            if state.lower() == player_guess:
+                print(state.lower())
+                print("That's a state!")
+                states_guessed.append(state)
+                states_not_guessed.pop(states_not_guessed.index(state))
 
-        # Make marker
-        map_marker = Turtle()
-        map_marker.hideturtle()
-        map_marker.penup()
+                # Make map marker
+                map_marker = Turtle()
+                map_marker.hideturtle()
+                map_marker.penup()
 
-        # Get state coords
-        state_coords_x = states_data[states_data["state"] == state]["x"]
-        state_coords_y = states_data[states_data["state"] == state]["y"]
+                # Get state coords
+                state_coords_x = states_data[states_data["state"] == state]["x"]
+                state_coords_y = states_data[states_data["state"] == state]["y"]
 
-        print({"x": state_coords_x}, {"y": state_coords_y})
 
-        # Write to map
-        map_marker.teleport(x=int(state_coords_x), y=int(state_coords_y))
-        map_marker.write(state)
+                # Write to map
+                map_marker.teleport(x=state_coords_x.iloc[0], y=state_coords_y.iloc[0])
+                map_marker.write(state)
+
+  # Allow user to exit and get a csv of all missed states
+    else:
+        states_not_guessed_data = pandas.DataFrame(states_not_guessed)
+        states_not_guessed_data.to_csv("./csv_map_usa_game/usa_map_game/states_not_guess.csv")
+
+        # Output a goodbye message to user with file path
+        bye = Turtle()
+        bye.hideturtle()
+        bye.teleport(-400,300)
+        screen.delay(5000)
+        bye.write(arg="SAVING MISSED STATES CSV to ./csv_map_usa_game/usa_map_game/states_not_guess.csv - Study Up!", font=("Arial", 14, "normal")),
+        screen.bye()
+
+if len(states_guessed) == 50:
+        winner = Turtle()
+        winner.hideturtle()
+        winner.teleport(-200,300)
+        winner.write(arg="YOU WIN! GREAT JOB! click anywhere to close", font=("Arial", 14, "normal")),
 
 screen.exitonclick()
