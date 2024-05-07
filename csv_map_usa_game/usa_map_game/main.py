@@ -38,7 +38,7 @@ while len(states_guessed) < 50:
                 print(state.lower())
                 print("That's a state!")
                 states_guessed.append(state)
-                states_not_guessed.pop(states_not_guessed.index(state))
+                print(states_not_guessed)
 
                 # Make map marker
                 map_marker = Turtle()
@@ -54,10 +54,10 @@ while len(states_guessed) < 50:
                 map_marker.teleport(x=state_coords_x.iloc[0], y=state_coords_y.iloc[0])
                 map_marker.write(state)
 
-  # Allow user to exit and get a csv of all missed states
     else:
-        states_not_guessed_data = pandas.DataFrame(states_not_guessed)
-        states_not_guessed_data.to_csv("./csv_map_usa_game/usa_map_game/states_not_guess.csv")
+        # Exit and create a csv of all missed states
+        states_not_guessed = pandas.DataFrame([state for state in state_names if state not in states_guessed])
+        states_not_guessed.to_csv("./csv_map_usa_game/usa_map_game/states_not_guess.csv")
 
         # Output a goodbye message to user with file path
         bye = Turtle()
