@@ -15,7 +15,6 @@ This will allow you to set default arguments and require arguments with each fun
 def add(*args):
     # Print an arg - second arg
     print(args[1])
-
     total = 0
     for n in args:
         total += n
