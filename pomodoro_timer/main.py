@@ -19,7 +19,6 @@ LONG_BREAK_MIN = 20
 # ------------- UI SETUP -------------- #
 window = Tk()
 window.title("Pomodoro Timer")
-# window.minsize(width=900, height=1000)
 window.config(padx=100, pady=200, bg=YELLOW)
 
 # Canvas widget
