@@ -16,7 +16,7 @@ window.config(padx=60, pady=60)
 # Define functions
 result = 0
 def convert_units():
-    number = int(unit_field.get())
+    number = float(unit_field.get())
     result = number * 1.6093445
     print(result)
     results_label.config(text=f"is equal to {result}")
