@@ -30,11 +30,11 @@ NO LOOPS
 
 Do not change the sentence var directly
 """
-# sentence = input("Type a sentence")
+sentence = input("Type a sentence")
 
-# # Get a dict of word:letter_counts from list
-# results = {word:len(word) for word in sentence.split()}
-# print(results)
+# Get a dict of word:letter_counts from list
+results = {word:len(word) for word in sentence.split()}
+print(results)
 
 """
 Use Dict Comprehension to create a dict called degrees Fahrenheit

@@ -20,6 +20,7 @@ def add(*args):
         total += n
     return total
 
+
 print(add(1,10,2))
 
 # **kwargs - double **
@@ -36,19 +37,29 @@ def calculate(n, **kwargs):
 
 calculate(2,add=3, multiply=5)
 
-#  Can use kwargs["name_of_argument"] to create optional args for the class
+
+# Can use kwargs["name_of_argument"] to create optional args for the class
 class Car:
-    def __init__(self, owner, **kwargs):
+    def __init__(self, owner, insurance, **kwargs):
         self.make = kwargs.get("make")
         self.model = kwargs.get("model")
         self.color = kwargs.get("color")
         self.owner = owner
+        self.insured = insurance
 
 # Note there are only **kwargs when hovering over the var
 # Will fail if a kwarg is missing
 # Using .get above will avoid this fail and just return None
 # This allows us to make optional keyword arguments
-my_car = Car(make="Nissan", owner="Ryan", model="GT-R")
+my_car = Car(insurance="Geico", owner="Ryan", model="GT-R")
 print(my_car.owner)
 print(my_car.make)
 print(my_car.model)
+print(my_car.insured)
+
+# Default values in a function
+def function(a=3, b=2, c=3):
+    return a+b+c
+
+# Change b to 10 and the rest stay as defaults
+print(function(b=10))
