@@ -73,8 +73,6 @@ def countdown(count):
     else:
         start_timer()
         if reps % 2 == 0 and count == 0:
-            print("check!")
-            print("check!")
             check_mark_pos += 1
             print({'check_mark_pos': check_mark_pos})
             check_mark.grid(column=2,row=3)
