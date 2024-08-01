@@ -75,12 +75,12 @@
 # When the number is divisible by 3 then instead of printing the number it should print 'Fizz'
 # When the number is divisible by 5 then print 'Buzz'
 # If divisible by both then print 'FizzBuzz'
-for number in range(1, 101):
-    if number % 3 == 0 and number % 5 == 0:
-        number = "FizzBuzz"
-    elif number % 3 == 0:
-        number = "Fizz"
-    elif number % 5 == 0:
-        number = 'Buzz'
+# for number in range(1, 101):
+#     if number % 3 == 0 and number % 5 == 0:
+#         number = "FizzBuzz"
+#     elif number % 3 == 0:
+#         number = "Fizz"
+#     elif number % 5 == 0:
+#         number = 'Buzz'
 
-    print(number)
+#     print(number)

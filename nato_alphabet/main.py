@@ -16,8 +16,16 @@ nato_alphabet = pandas.read_csv(filepath_or_buffer="./nato_alphabet/nato_alphabe
 nato_dict = {row.Letter: row.Phrase for (index, row) in nato_alphabet.iterrows()}
 print(nato_dict)
 
-word = input("Type a word \n").upper()
 
 # Find the letter of the word within the nato_dict
-results = [nato_dict[letter] for letter in word]
-print(results)
+def generate_phonetic():
+    try:
+        word = input("Type a word \n").upper()
+        results = [nato_dict[letter] for letter in word]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please.")
+        generate_phonetic()
+    else:
+        print(results)
+
+generate_phonetic()

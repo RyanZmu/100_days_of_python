@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter.messagebox import *
-import random
+from random import shuffle, choice, randint
 import pyperclip
+import json
 
 #--------------Password Generator------------#
 def generate_password():
@@ -16,18 +17,18 @@ def generate_password():
     char_pool: list = []
 
     # Number ranges for characters
-    nr_letters = random.randint(8, 10)
-    nr_numbers = random.randint(2, 4)
-    nr_symbols = random.randint(2, 4)
+    nr_letters = randint(8, 10)
+    nr_numbers = randint(2, 4)
+    nr_symbols = randint(2, 4)
 
     # Find x amount of random numbers - range = number of times to repeat
-    password_letters = [random.choice(LETTER_LIST) for _ in range(nr_letters)]
-    password_numbers = [random.choice(NUM_LIST) for _ in range(nr_numbers)]
-    password_symbols = [random.choice(SYMBOLS_LIST) for _ in range(nr_symbols)]
+    password_letters = [choice(LETTER_LIST) for _ in range(nr_letters)]
+    password_numbers = [choice(NUM_LIST) for _ in range(nr_numbers)]
+    password_symbols = [choice(SYMBOLS_LIST) for _ in range(nr_symbols)]
 
     # Reorder the char_pool to make a random password
     char_pool = password_letters + password_numbers+ password_symbols
-    random.shuffle(char_pool)
+    shuffle(char_pool)
     final_password = "".join(char_pool)
 
     password_field_text.insert(0, final_password)
@@ -46,25 +47,61 @@ def update_pass_file():
     email_and_username_value = email_and_username_text.get()
     password_value = password_field_text.get()
 
+    # Gather form data for json
+    new_data = {
+        web_value: {
+                "email": email_and_username_value,
+                "password": password_value,
+        }
+    }
+
     # Check if fields are blank
     if len(web_value) == 0 or len(email_and_username_value) == 0 or len(password_value) == 0:
         showwarning(
             title="Invalid Entries",
             message="You have left one or more fields blank")
     else:
-        # Confirm user wants to save
+        # # Confirm user wants to save
         save_message = askokcancel(
             title="Confirm Save",
             message=f"Are you sure you want to save this?\n Website: {web_value}\n Email/Username: {email_and_username_value}\n Password:{password_value}")
 
         if save_message:
             # Write to file
-            with open("./password_manager/data.txt", "a") as password_file:
-                password_file.write(f"{web_value} | {email_and_username_value} | {password_value}\n")
+            try:
+                with open("./password_manager/data.json", "r") as password_file:
+                    # Reading current data
+                    data = json.load(password_file)
+            except FileNotFoundError:
+                with open("./password_manager/data.json", "w") as password_file:
+                    # Adds data to new file
+                    json.dump(new_data, password_file, indent=4)
+            else:
+                with open("./password_manager/data.json", "w") as password_file:
+                    # Check if data exists, ask for overwrite if needed - checks for key in dict
+                    if web_value in data:
+                        overwrite_message = askokcancel(
+                            title="Confirm Overwrite",
+                            message=f"Save data exists for {web_value}.\n Overwrite this data?")
+                        if overwrite_message:
+                            # Updating old data with new data
+                            data.update(new_data)
+                            # Saving updated data if overwrite accepted
+                            json.dump(data, password_file, indent=4)
+                        else:
+                            # Dump current data back in with no changes (Erases file data if this is excluded)
+                            json.dump(data, password_file, indent=4)
+                    else:
+                        # Saving updated data and add to password file
+                        data.update(new_data)
+                        json.dump(data, password_file, indent=4)
+            finally:
+                # Remove text in fields
+                website_text.delete(0, END)
+                password_field_text.delete(0, END)
+        else:
+            pass
 
-            # Delete data on form
-            website_text.delete(0, END)
-            password_field_text.delete(0, END)
 
 #--------------UI Setup-----------#
 window = Tk()
