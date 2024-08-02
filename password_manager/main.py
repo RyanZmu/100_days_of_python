@@ -43,20 +43,20 @@ def update_pass_file():
     global website_text, email_and_username_text, password_field_text
 
     # Get values from fields
-    web_value = website_text.get()
+    website = website_text.get()
     email_and_username_value = email_and_username_text.get()
     password_value = password_field_text.get()
 
     # Gather form data for json
     new_data = {
-        web_value: {
+        website: {
                 "email": email_and_username_value,
                 "password": password_value,
         }
     }
 
     # Check if fields are blank
-    if len(web_value) == 0 or len(email_and_username_value) == 0 or len(password_value) == 0:
+    if len(website) == 0 or len(email_and_username_value) == 0 or len(password_value) == 0:
         showwarning(
             title="Invalid Entries",
             message="You have left one or more fields blank")
@@ -64,7 +64,7 @@ def update_pass_file():
         # # Confirm user wants to save
         save_message = askokcancel(
             title="Confirm Save",
-            message=f"Are you sure you want to save this?\n Website: {web_value}\n Email/Username: {email_and_username_value}\n Password:{password_value}")
+            message=f"Are you sure you want to save this?\n Website: {website}\n Email/Username: {email_and_username_value}\n Password:{password_value}")
 
         if save_message:
             # Write to file
@@ -79,10 +79,10 @@ def update_pass_file():
             else:
                 with open("./password_manager/data.json", "w") as password_file:
                     # Check if data exists, ask for overwrite if needed - checks for key in dict
-                    if web_value in data:
+                    if website in data:
                         overwrite_message = askokcancel(
                             title="Confirm Overwrite",
-                            message=f"Save data exists for {web_value}.\n Overwrite this data?")
+                            message=f"Save data exists for {website}.\n Overwrite this data?")
                         if overwrite_message:
                             # Updating old data with new data
                             data.update(new_data)
@@ -102,6 +102,29 @@ def update_pass_file():
         else:
             pass
 
+
+def search_password():
+    global website_text
+
+    website = website_text.get()
+
+    try:
+        with open("./password_manager/data.json", "r") as password_file:
+            data = json.load(password_file)
+            requested_website = data[website]
+    except KeyError:
+        showwarning(
+            title="Password Not Found",
+            message=f"There is no password associated with the website {website}!")
+    except FileNotFoundError:
+        showwarning(
+            title="No Password Data",
+            message="Failed to find password data; You must save a password first!")
+    else:
+        showinfo(
+            title=f"{website}",
+            message=f"Email: {requested_website["email"]}\n Password: {requested_website["password"]}"
+        )
 
 #--------------UI Setup-----------#
 window = Tk()
@@ -127,11 +150,13 @@ password_field_text = Entry(width=35)
 # Buttons
 password_gen_button = Button(text="Generate Password", command=generate_password)
 add_button = Button(text="Add",width=36, command=update_pass_file)
+search_button = Button(text="Search", command=search_password)
 
 # Layout
 logo.grid(column=1, row=0)
 website.grid(column=0,row=1)
 website_text.grid(column=1, row=1, columnspan=2)
+search_button.grid(column=3,row=1)
 email_and_username.grid(column=0, row=2)
 email_and_username_text.grid(column=1, row=2, columnspan=2)
 password_field.grid(column=0,row=3)
