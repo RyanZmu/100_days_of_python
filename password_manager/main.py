@@ -37,8 +37,6 @@ def generate_password():
     pyperclip.copy(final_password)
 
 #--------------Save Password-----------#
-# Take inputs and save them to a file after add is pressed
-# username | email | password data.txt
 def update_pass_file():
     global website_text, email_and_username_text, password_field_text
 
