@@ -29,9 +29,11 @@ print(f"WELCOME To The Number Guessing Game!\n"\
 
 
 def number_guessing_game():
+    global end_game
 
     game_difficulty: str = input("Choose a difficulty: Easy (10 attempts) or Hard (5 attempts)\n")
     user_guess: int = int(input("Make a guess!:\n"))
+    attempts_left = 0
 
     if game_difficulty.lower() == "easy":
         attempts_left = 10
@@ -42,16 +44,16 @@ def number_guessing_game():
 
     if attempts_left >= 0:
         if user_guess > RANDOM_NUMBER:
-            attempts_left - 1
+            attempts_left -= 1
             print(f"Too high! You have {attempts_left} attempts left!")
         elif user_guess < RANDOM_NUMBER and attempts_left:
-            attempts_left - 1
+            attempts_left -= 1
             print(f"Too Low! You have {attempts_left} attempts left!")
         elif user_guess == RANDOM_NUMBER:
             print(f"CORRECT THE NUMBER IS {RANDOM_NUMBER} YOU WIN!!!")
     elif attempts_left < 0:
-        end_game = True
         print(f"No Attempts Left! You Lose! The Number was {RANDOM_NUMBER}")
+        end_game = True
 
 
 while not end_game:
