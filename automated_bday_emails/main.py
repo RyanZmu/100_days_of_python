@@ -10,18 +10,15 @@ from random import choice
 
 # Read the birthdays file
 birthday_file = pandas.read_csv(filepath_or_buffer="./automated_bday_emails/data/birthdays.csv")
-print(birthday_file)
 
 # Turn into dict
 birthday_dict = birthday_file.to_dict(orient="records")
-print(birthday_dict)
 
 # Check for month and day
 current_date = dt.datetime.now()
 today_tuple = (current_date.month, current_date.day)
 current_month = current_date.month
 current_day = current_date.day
-print({"month": current_month}, {"day": current_day})
 
 for person in birthday_dict:
     if person["month"] == current_month and person["day"] == current_day:
