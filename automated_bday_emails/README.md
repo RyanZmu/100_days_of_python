@@ -6,8 +6,8 @@
 
 ## How To Use
 - In main.py replace my_email with your own email address
-- Find your provider's stmp server address (smtp.gmail.com for example)
-- Set up your account under security settings and get an App Password (Look online for info)
+- Find your provider's stmp server address (smtp.gmail.com for example) and change the host var
+- Set up your email account under security settings and get an App Password generated (Look online for info)
 - Create a new file named .env in the main directory and place the password directly into it
 - Edit the birthday.csv file with your own contacts
 - Edit the letter templates to your liking and replace my name with your own

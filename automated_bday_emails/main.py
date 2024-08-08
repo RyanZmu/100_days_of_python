@@ -39,11 +39,12 @@ for person in birthday_dict:
 
         # Set up email vars
         my_email = "ryanzmudka@gmail.com"
+        host = "smtp.gmail.com"
         with open(file="./automated_bday_emails/.env", mode="r") as env_file:
             password = env_file.read()
 
         # Send birthday email
-        with smtplib.SMTP(host="smtp.gmail.com") as connection:
+        with smtplib.SMTP(host=host) as connection:
             connection.starttls()
             connection.login(user=my_email, password=password)
             connection.sendmail(
