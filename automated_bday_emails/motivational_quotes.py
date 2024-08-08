@@ -17,7 +17,7 @@ if current_day == monday:
     print(current_day)
     print("It is Monday!")
 
-    # Pick random email from file
+    # Pick random quote from file
     with open(file="./automated_bday_emails/data/quotes.txt") as quotes:
         # Read quotes and pick a random one
         quotes = quotes.readlines()
