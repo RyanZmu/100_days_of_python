@@ -33,8 +33,7 @@ for person in birthday_dict:
 
         # Read contents of template
         with open(file=random_letter, mode="r") as letter:
-            original_letter = letter.read()
-            letter_to_send = original_letter.replace("[NAME]", person["name"])
+            letter_to_send = letter.read().replace("[NAME]", person["name"])
             print(letter_to_send)
 
         # Set up email vars
