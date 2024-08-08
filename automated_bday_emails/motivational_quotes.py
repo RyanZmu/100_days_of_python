@@ -15,7 +15,7 @@ current_day = current_datetime.weekday()
 
 if current_day == monday:
     print(current_day)
-    print("It is Thursday!")
+    print("It is Monday!")
 
     # Pick random email from file
     with open(file="./automated_bday_emails/data/quotes.txt") as quotes:
