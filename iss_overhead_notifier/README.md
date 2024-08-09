@@ -30,4 +30,4 @@
 
 ## How To Use
 - Run kanye_quotes.py and click on Kanye's head for a quote
-- Shake your head at the ridicilousness
+- Shake your head at the ridiculousness
