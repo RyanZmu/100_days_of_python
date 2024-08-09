@@ -11,7 +11,7 @@
 - Create a .env file in the main directory and inside of it enter your APP PASSWORD provided by your email provider (Look online for how to do this step - Usually under your email account's Security settings there will be an APP PASSWORD option)
 - Open the iss_overhead_notifier folder and run the main.py file inside a Console - Keep your console open and every 60 seconds you will see the current ISS coords (long,lat) and text letting you know if the iSS is or is not overhead and if an email is being sent
 
-# Sunset/Sunrise checker
+# Sunset/Sunrise Checker
 
 ## What It Does
 - Using coords provided it will tell you when the sunrise and sunset will be
