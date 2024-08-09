@@ -16,12 +16,11 @@ birthday_dict = birthday_file.to_dict(orient="records")
 
 # Check for month and day
 current_date = dt.datetime.now()
-today_tuple = (current_date.month, current_date.day)
 current_month = current_date.month
 current_day = current_date.day
 
 for person in birthday_dict:
-    if person["month"] == current_month and person["day"] == current_day:
+    if person["month"] == current_month == current_month and person["day"] == current_day:
         print(f"Today is {person["name"]}'s Birthday!")
 
         # Pick a random letter to send
