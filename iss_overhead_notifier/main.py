@@ -38,25 +38,19 @@ def is_iss_over_head():
         return False
 
 def is_night():
-    global MY_LAT, MY_LONG, time_now
-    # Sunset/Sunrise API
+    global MY_LAT, MY_LONG
     parameters = {
         "lat": MY_LAT,
         "lng": MY_LONG,
         "time_format": 24,
     }
 
+    # Sunset/Sunrise API
     response = requests.get(url=f"https://api.sunrisesunset.io/json", params=parameters)
     response.raise_for_status()
     data = response.json()
-    # print(data)
 
-    # print(data)
-
-    sunrise = int(data["results"]["sunrise"][0:2])
     sunset = int(data["results"]["sunset"][0:2])
-
-    print(f"Today's sunrise is at {sunrise} and sunset is at {sunset}")
 
     time_now = datetime.now().hour
     print(time_now)
@@ -65,9 +59,6 @@ def is_night():
         return True
     else:
         return False
-
-def notify_iss_overhead():
-    global is_iss, is_nighttime
 
 # Continiously Check every 60 seconds
 while True:
