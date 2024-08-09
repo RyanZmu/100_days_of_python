@@ -1,4 +1,4 @@
-# ISS Notifier Applcation
+# ISS Notifier Application
 
 ## What It Does
 - Checks the position of the ISS every 60 seconds to see if it's overhead
