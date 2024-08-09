@@ -10,3 +10,4 @@
 
 ## Tips
 - Remove the existing words_to_learn.csv to start fresh with the original words in the German_To_English_Words.csv file.
+- Add your own German words as well! Just add more German and English words to their respective columns
