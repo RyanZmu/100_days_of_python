@@ -6,4 +6,4 @@
   I will try to keep the requirements.txt file up to date with all of the dependent libraries!
 
 ## Note
-  This is a development repo and some programs may not be feature complete or a bit buggy!
+  This is a development repo and some programs may not be feature complete or may be a bit buggy!
