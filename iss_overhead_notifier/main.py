@@ -29,12 +29,13 @@ def is_iss_over_head():
     iss_latitude = float(data["iss_position"]["latitude"])
     iss_longitude = float(data["iss_position"]["longitude"])
 
-    iss_position = (iss_longitude, iss_latitude)
+    iss_position = (iss_latitude, iss_longitude)
     print({"iss_pos":iss_position})
     # Output where the ISS is currently
     geolocator = Nominatim(user_agent="iss_overhead_notifier")
-    location = geolocator.reverse(f"{iss_longitude}, {iss_latitude}")
-    print(f"The ISS is currently over {location}")
+    location = geolocator.reverse(query=iss_position, language="en")
+    if location is not None:
+        print(f"The ISS is currently over {location}")
 
     # Current POS can be +5 or -5 degrees of ISS position
     if MY_LONG - 5 <= iss_position[0] <= MY_LONG + 5 and MY_LAT - 5 <= iss_position[1] <= MY_LAT + 5 :
