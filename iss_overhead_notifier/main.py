@@ -7,9 +7,10 @@ from datetime import datetime
 import smtplib
 import time
 from geopy.geocoders import Nominatim
+# from dotenv import load_dotenv
 
 
-MY_LAT =  42.963795
+MY_LAT = 42.963795
 MY_LONG = -85.670006
 HOST = "smtp.gmail.com"
 MY_EMAIL = "ryanzmudka@gmail.com"
@@ -17,7 +18,8 @@ MY_EMAIL = "ryanzmudka@gmail.com"
 with open(file="./iss_overhead_notifier/.env") as password_file:
     PASSWORD = password_file.read()
 
-#======== API Calls ========
+
+# ======== API Calls ========
 def is_iss_over_head():
     global MY_LAT, MY_LONG
     # ISS API
@@ -34,6 +36,7 @@ def is_iss_over_head():
     # Output where the ISS is currently
     geolocator = Nominatim(user_agent="iss_overhead_notifier")
     location = geolocator.reverse(query=iss_position, language="en")
+    print(location)
     if location is not None:
         print(f"The ISS is currently over {location}")
 
@@ -42,6 +45,7 @@ def is_iss_over_head():
         return True
     else:
         return False
+
 
 def is_night():
     global MY_LAT, MY_LONG
@@ -66,8 +70,9 @@ def is_night():
     else:
         return False
 
-# Continiously Check every 60 seconds
+
 while True:
+    # Continuously Check every 60 seconds
     time.sleep(60)
     print(f"ISS Notifier is running at {datetime.now()}!")
     if is_iss_over_head() and is_night():

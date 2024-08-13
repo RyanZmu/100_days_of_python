@@ -19,7 +19,7 @@ current_card = {}
 
 # ========== Functions ==========
 def get_next_card():
-    global current_card, flip_timer, to_learn
+    global current_card, flip_timer, to_learn, translation_data
     # Cancel the timer on click
     window.after_cancel(flip_timer)
     try:
@@ -32,8 +32,8 @@ def get_next_card():
 
     # Update card text
     card.itemconfig(card_image, image=flash_card_front_image)
-    card.itemconfig(language_text, text="German")
-    card.itemconfig(current_word, text=f"{current_card["German"]}")
+    card.itemconfig(language_text, text="German", fill="black")
+    card.itemconfig(current_word, text=f"{current_card['German']}", fill="black")
 
     # Flip after 3 seconds if no button is clicked
     flip_timer = window.after(3000, func=flip_card)
@@ -41,14 +41,14 @@ def get_next_card():
 def flip_card():
     global current_card
     card.itemconfig(language_text, text="English", fill="white")
-    card.itemconfig(current_word, text=f"{current_card["English"]}", fill="white")
+    card.itemconfig(current_word, text=f"{current_card['English']}", fill="white")
     card.itemconfig(card_image, image=flash_card_back_image)
 
 def on_check():
     global current_card
     # On check, word is removed from the possible words to display
     to_learn.remove(current_card)
-    print(to_learn)
+    # print(to_learn)
 
     get_next_card()
 
@@ -58,7 +58,6 @@ def on_cross():
     new_data = pandas.DataFrame(data=to_learn)
     new_data.to_csv(path_or_buf="./flashcards_german/data/words_to_learn.csv", index=False)
     get_next_card()
-
 
 
 # ========== UI Setup ==========
@@ -78,16 +77,16 @@ cross_image = PhotoImage(file="./flashcards_german/images/wrong.png")
 
 # Flash Card
 card = Canvas(height=700, width=900, bg=BACKGROUND_COLOR, highlightthickness=0)
-card_image = card.create_image(500,350, image=flash_card_front_image)
+card_image = card.create_image(500, 350, image=flash_card_front_image)
 language_text = card.create_text(500, 300, text="German", font=("Arial", 18, "italic"))
-current_word = card.create_text(500, 400, text=current_card, font=("Arial", 24, "bold"))
+current_word = card.create_text(500, 400, text=f"current_card", font=("Arial", 24, "bold"))
 
 # Buttons
 check_button = Button(image=check_mark_image, command=on_check)
 cross_button = Button(image=cross_image, command=on_cross)
 
 
-card.grid(column=0,row=0, columnspan=2)
+card.grid(column=0, row=0, columnspan=2)
 check_button.grid(column=1, row=1)
 cross_button.grid(column=0, row=1)
 

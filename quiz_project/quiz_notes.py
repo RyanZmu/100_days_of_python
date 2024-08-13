@@ -19,3 +19,18 @@ user_2 = User(user_id="002", username= "bill")
 user_1.follow(user_2)
 
 print(user_1.following, user_1.followers)
+
+
+# Type hints and arrows
+def police_check(age: int) -> bool:
+    if age > 18:
+        can_drive = True
+    else:
+        can_drive = False
+    return can_drive
+
+
+if police_check(19):
+    print("Can Drive")
+else:
+    print("Cant Drive")

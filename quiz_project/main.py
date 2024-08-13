@@ -9,20 +9,17 @@ Use OOP only!
 from question_model import Question
 from quiz_brain import QuizBrain
 from data import question_data
+from ui import QuizInterface
 
 # Create question bank
 question_bank = []
 for question in question_data:
-    new_question = Question(question['text'], question['answer'])
+    new_question = Question(question['question'], question['correct_answer'])
     question_bank.append(new_question)
-
 
 # Start Quiz Brain to handle game logic
 quiz = QuizBrain(question_list=question_bank)
-
-
-while quiz.still_has_questions():
-    quiz.nextQuestion()
+quiz_ui = QuizInterface(quiz)
 
 # Output final score
 print(f"You have completed the quiz!\nFinal Score: {quiz.score} Correct out of {quiz.question_number} Total Questions")
