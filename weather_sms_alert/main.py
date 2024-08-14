@@ -3,9 +3,9 @@ import requests
 import os
 from twilio.rest import Client
 
-account_sid = os.environ.get("TWILIO_SID")
-auth_token = os.environ.get("TWILIO_AUTH_TOKEN")
-ow_api_key = os.environ.get("OWM_API_KEY")
+account_sid: str | None = os.environ.get("TWILIO_SID")
+auth_token: str | None = os.environ.get("TWILIO_AUTH_TOKEN")
+ow_api_key: str | None = os.environ.get("OWM_API_KEY")
 
 parameters = {
     "lon": -85.668083,
