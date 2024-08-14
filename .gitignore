@@ -161,4 +161,4 @@ cython_debug/
 #.idea/
 data.txt
 data.json
-*/workspace.xml
+*/.idea/workspace.xml
