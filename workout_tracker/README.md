@@ -18,3 +18,8 @@
   - SHEETY_PASSWORD = os.environ.get("SHEETY_PASSWORD")
 - Run main.py in the console and say what workout you did
 - Open Google Sheet and look at updated data
+
+## Future Updates
+- Add a UI
+- Set minutes to hours
+- Allow multiple workouts per query
