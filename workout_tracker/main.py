@@ -12,8 +12,7 @@ NUTRI_API_KEY = os.environ.get("NUTRI_API_KEY")
 NUTRI_APP_ID = os.environ.get("NUTRI_APP_ID")
 
 # Endpoints
-nutri_api_endpoint = "https://trackapi.nutritionix.com"
-nutri_api_exercise_endpoint = f"{nutri_api_endpoint}/v2/natural/exercise"
+nutri_api_exercise_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
 sheety_api_endpoint = "https://api.sheety.co/40c569d88fe8435409662e9a2ac66abe/workoutTracker/sheet1"
 
 # Nutri request
