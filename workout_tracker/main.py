@@ -30,10 +30,9 @@ nutri_exercise_data = nutri_exercise_request.json()
 print(nutri_exercise_data)
 
 # Get relevant parts of Nutri output
-exercise_info = nutri_exercise_data["exercises"][0]
-exercise_name = exercise_info["name"]
-exercise_duration = exercise_info["duration_min"]
-exercise_calories = exercise_info["nf_calories"]
+exercise_name = nutri_exercise_data["exercises"][0]["name"]
+exercise_duration = nutri_exercise_data["exercises"][0]["duration_min"]
+exercise_calories = nutri_exercise_data["exercises"][0]["nf_calories"]
 
 # Add a row to workout tracker using Sheety
 SHEETY_TOKEN = os.environ.get("SHEETY_TOKEN")
