@@ -48,11 +48,11 @@ def get_stock_difference():
     print(yesterdays_closing_price)
     print(prior_day_closing_price)
 
-    stock_difference = round(yesterdays_closing_price / prior_day_closing_price)
+    difference = abs(yesterdays_closing_price - prior_day_closing_price)
+    stock_difference = round((difference / yesterdays_closing_price) * 100, 2)
     print(stock_difference)
 
-    if stock_difference > 0:
-        print("Stock changed")
+    if stock_difference > 5:
         send_sms_alert(stock_change=stock_difference)
     return stock_difference
 
@@ -83,18 +83,18 @@ def send_sms_alert(stock_change):
     up_arrow = "🔼"
 
     try:
+        # Get the first article if one exists
         breaking_news: dict = get_breaking_news()["articles"][0]
+        # Set Values
         breaking_headline: str = breaking_news["title"]
         breaking_brief: str = breaking_news["content"]
         breaking_url: str = breaking_news["url"]
-        breaking_date: str = breaking_news["publishedAt"]
     except IndexError:
         news_output = "Sorry, No news article found related to this stock change!"
     else:
         news_output = (f"Headline: {breaking_headline}\n "
                        f"Brief: {breaking_brief}\n "
-                       f"Link: {breaking_url}"
-                       f"Date: {breaking_date}")
+                       f"Link: {breaking_url}")
     print(news_output)
 
     # Check if up or down arrow should be used for output
