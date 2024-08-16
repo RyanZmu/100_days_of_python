@@ -8,6 +8,7 @@
 ## How To Use It
 - Create your own Google Sheet named Workout Trainer
 - Create a Sheety account and link your Sheet
+- Set Basic Authentication up with your Sheety project
 - Get an API Key and APP ID from Nutritionix API
 - Create Environment Variables for each api key and account
   - NUTRI_API_KEY = os.environ.get("NUTRI_API_KEY")
