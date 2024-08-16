@@ -10,6 +10,9 @@ from datetime import datetime
 # Constants
 NUTRI_API_KEY = os.environ.get("NUTRI_API_KEY")
 NUTRI_APP_ID = os.environ.get("NUTRI_APP_ID")
+SHEETY_TOKEN = os.environ.get("SHEETY_TOKEN")
+SHEETY_USERNAME = os.environ.get("SHEETY_USERNAME")
+SHEETY_PASSWORD = os.environ.get("SHEETY_PASSWORD")
 
 # Endpoints
 nutri_api_exercise_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
@@ -35,11 +38,6 @@ exercise_duration = nutri_exercise_data["exercises"][0]["duration_min"]
 exercise_calories = nutri_exercise_data["exercises"][0]["nf_calories"]
 
 # Add a row to workout tracker using Sheety
-SHEETY_TOKEN = os.environ.get("SHEETY_TOKEN")
-SHEETY_USERNAME = os.environ.get("SHEETY_USERNAME")
-SHEETY_PASSWORD = os.environ.get("SHEETY_PASSWORD")
-
-# Sheety request
 sheety_headers = {
     "Authorization": SHEETY_TOKEN
 }
