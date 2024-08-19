@@ -1,7 +1,11 @@
 """ SMS Weather Alert Project """
 import requests
 import os
-from twilio.rest import Client
+import smtplib
+
+MY_EMAIL = "ryanzmudka@gmail.com"
+PASS = os.environ.get("EMAIL_PASSWORD")
+HOST = "smtp.gmail.com"
 
 account_sid: str | None = os.environ.get("TWILIO_SID")
 auth_token: str | None = os.environ.get("TWILIO_AUTH_TOKEN")
@@ -39,11 +43,11 @@ for weather_forecast in forecast_data_list:
         rain_alert_condition = upcoming_weather_description
 
 if will_rain:
-    client = Client(account_sid, auth_token)
-    message = client.messages.create(
-        from_="whatsapp:+14155238886",
-        body="Rain is on the way! - Bring an umbrella!",
-        to="whatsapp:+16168265440"
+    connection = smtplib.SMTP(host=HOST)
+    connection.starttls()
+    connection.login(MY_EMAIL, PASS)
+    connection.sendmail(
+        from_addr=MY_EMAIL,
+        to_addrs=MY_EMAIL,
+        msg="Subject: Weather Update\n\n Rain is coming today! Bring an umbrella!"
     )
-
-    print(message.sid)
