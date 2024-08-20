@@ -26,6 +26,7 @@ class MakePlaylist:
         playlists = sp.user_playlist_create(
             user=current_user,
             name=f"{self.date} Billboard Top 100",
+            description=f"Check out the Billboard Top 100 songs from {self.date} This was generated with Python :-)",
             public=False
         )
 

@@ -35,7 +35,7 @@ class SongData:
                 index = song_list.index(song)
                 track = {filtered_artists[index]: song}
             except IndexError:
-                print("No artist or song found")
+                print("Out of bounds Index value")
             else:
                 final_track_list.append(track)
 

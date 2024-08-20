@@ -7,7 +7,6 @@ Spotify Music Time Machine
 
 For year search https://www.billboard.com/charts/hot-100/2024-08-14
 
-Follow OOP for this project
 (Stretch) Make a UI for this project
 """
 from dotenv import load_dotenv
