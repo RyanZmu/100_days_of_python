@@ -4,7 +4,7 @@
 - Creates a Spotify Playlist for the Billboard Top 100 songs for a given date
 
 ## How It Works
-- Web scrapes the Billboard website using the BeautifulSoup library.
+- Web scrapes the Billboard website using the Beautiful Soup library.
 - Finds the song names and artist names from the returned data
 - Sends the data to Spotify Web API
 - Spotify API creates a new playlist and populates it with the top 100 songs - sometimes it can't find a song and will skip
