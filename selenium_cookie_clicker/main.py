@@ -45,7 +45,7 @@ def check_upgrade():
         print(f"Upgrade {unlocked_upgrades_elements[len(costs) - 1].text} bought")
 
 
-timeout = time.time() + 1  # five seconds from now
+timeout = time.time() + 5  # five seconds from now
 five_mins = time.time() + 60*5  # five mins
 
 while time.time() < five_mins:
@@ -54,9 +54,8 @@ while time.time() < five_mins:
 
     # Roughly every 5 seconds check for upgrade
     if time.time() > timeout:
-        print("5 seconds")
         # Check Upgrades
         check_upgrade()
 
         # Add another 5 seconds to the timeout
-        timeout = time.time() + 1
+        timeout = time.time() + 5
