@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    background-color: #d1d1d1;
+}
+
+h2 {
+    color: #d1d1d1;
+    position: absolute;
+    margin-left: 10vw;
+    z-index: 2;
+}
+
+.block-solid {
+    display: flex;
+    align-items: flex-start;
+}
+
+.blog-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.block-solid {
+    background-color: #2d6883;
+    height: 20vh;
+    width: 100vw;
+    position: absolute;
+    z-index: 0
+}
+
+.post {
+    display: flex;
+    background-color: #e8e8e8;
+    width: 60vh;
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1vw;
+    margin: 10vh;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    z-index: 1;
+}

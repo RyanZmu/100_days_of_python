@@ -1,26 +1,35 @@
 body {
     height: 100vh;
     width: 100vw;
-    background-color: #4c8485;
+    background-color: #7a7a80;
 }
 
-div {
-    margin-bottom: 5vh;
+footer {
+    display: flex;
+    justify-content: center;
 }
 
-#profile-pic {
-    height: 10vh;
-    width: 5vw;
+.body-images {
+    height: 18vh;
+    width: 10vw;
+    margin: 2vw;
 }
 
-#banner-pic {
-    height: 100vh;
-    width: 100vw;
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.intro #banner-pic {
+    height: 110vh;
+    width: 110vw;
     z-index: 0;
 }
 
-#banner-text {
-    color: black;
+.intro .banner-text {
+    color: white;
     font-family: "Great Vibes", cursive;
     font-weight: 400;
     font-style: normal;
@@ -30,17 +39,18 @@ div {
     margin: 50vh;
 }
 
-#intro {
+.skills {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
-#skills {
-    display: flex;
-    justify-content: center;
-
+.dots-divider {
+    height: 10vh;
+    width: 5vw;
+    margin-left:48vw;
+    margin-right: 50vw;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
 }
 
 .about-me {

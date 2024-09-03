@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <title>Home</title>
+</head>
+<body>
+<h1>Hello!</h1>
+<h3>Check it out! A random number! {{ num }}</h3>
+
+<!--url_for() can pass arguments to the route-->
+<a href="{{ url_for('get_blog') }}">Go To Blogs</a>
+
+</body>
+</html>
