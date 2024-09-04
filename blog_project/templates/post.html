@@ -1,26 +1,24 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <title>Blog Post</title>
-</head>
-<body>
-<div class="block-solid">
-    <h2>My Blog</h2>
+{% include "header.html" %}
+<body class="bg-dark-subtle">
+<div class="container-fluid d-flex bg-dark justify-content-center align-items-center w-100 h-50 p-5">
+    <img src="/static/images/blog_banner.jpg" class="w-25 opacity-75">
 </div>
-<div class="blog-posts">
-    <div class="post">
-        {% for post in posts: %}
-            {% if post["id"] == num | int: %}
-            <h1>{{ post["title"] }}</h1>
-            <h3>{{post["subtitle"]}}</h3>
-            <p>{{ post["body"] }}</p>
-            <a href="{{ url_for('get_blog') }}">Back</a>
-            {% endif %}
-        {% endfor %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col d-flex flex-column align-items-center mx-5 p-5">
+            {% for post in posts: %}
+                {% if post["id"] == num | int: %}
+                <h1>{{ post["title"] }}</h1>
+                <h3>{{post["subtitle"]}}</h3>
+                <p>{{ post["body"] }}</p>
+                <a class="btn bg-success text-white" href="{{ url_for('get_blog') }}">Back</a>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
 </div>
+{% include "footer.html" %}
 </body>
 </html>
