@@ -6,8 +6,38 @@
     <img src="/static/images/pc.png" class="w-25 opacity-50">
 </div>
 <div class="container-fluid text-center bg-dark-subtle bg-gradient h-50">
-    <h1>Contact Us</h1>
-    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dapibus orci et magna semper dignissim. Mauris vestibulum gravida ipsum non dignissim. Sed nec purus magna. Aliquam venenatis tristique lectus, nec vestibulum nisl tincidunt ac. Aenean nec varius leo. Nulla facilisi. Nam pulvinar nulla et mi sodales, quis suscipit elit gravida. Suspendisse potenti. </p>
+    {% if request.method == "GET" %}
+    <h1>Contact Us!</h1>
+    <p>Want to get a hold of us? Fill out the form below and we will get back soon!</p>
+    {% elif request.method == "POST" %}
+    <h1>Successfully Sent Message!</h1>
+    {% endif %}
+</div>
+
+<div class="container d-flex flex-column align-items-center">
+    <div class="row">
+        <div class="col">
+            <form action="{{ url_for('contact_page') }}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" name="email">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" name="telephone">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Message</label>
+                    <input type="text" class="form-control" name="message">
+                </div>
+                <button class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
 
 {% include "footer.html" %}
