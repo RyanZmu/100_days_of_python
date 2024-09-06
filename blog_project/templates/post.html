@@ -1,7 +1,7 @@
-<!doctype html>
-<html lang="en">
-{% include "header.html" %}
-<body class="bg-dark-subtle">
+{% extends "base.html" %}
+{% block title %} Posts {% endblock %}
+
+{% block content %}
 <div class="container-fluid d-flex bg-dark justify-content-center align-items-center w-100 h-50 p-5">
     <img src="/static/images/blog_banner.jpg" class="w-25 opacity-75">
 </div>
@@ -20,5 +20,4 @@
     </div>
 </div>
 {% include "footer.html" %}
-</body>
-</html>
+{% endblock %}
