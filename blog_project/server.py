@@ -26,9 +26,8 @@ class MyForm(FlaskForm):
 
 app = Flask(__name__)
 
-# Config app for CSFR with a secret ey
+# Config app for CSFR with a secret key
 app.config["SECRET_KEY"] = SECRET_KEY
-
 # Enable CSRF
 csrf = CSRFProtect(app)
 
