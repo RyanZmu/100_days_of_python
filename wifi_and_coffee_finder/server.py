@@ -23,7 +23,7 @@ csrf = CSRFProtect(app)
 bootstrap = Bootstrap5(app)
 
 # Create form to add Cafe
-class MyForm(FlaskForm):
+class CafeForm(FlaskForm):
     cafe_name = StringField(label="Cafe Name", validators=[DataRequired()])
     location = URLField(label="Location", validators=[DataRequired()])
     opening = TimeField(label="Opening Time", validators=[DataRequired()])
@@ -50,7 +50,7 @@ def cafes():
 
 @app.route("/cafes/add", methods=["GET", "POST"])
 def add_cafe():
-    form = MyForm()
+    form = CafeForm()
 
     if form.validate_on_submit():
         user_data = {
