@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% from 'bootstrap4/table.html' import render_table %}
+
+{% block title %}Cafes{% endblock %}
+
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      {% for cafe in cafe_data[0] %}
+        <th scope="col">
+        {{ cafe }}
+        </th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+      <!--  Loop over cafe data, make a new row for each index and fill in the column-->
+      {% for cafe in cafe_data %}
+        <tr>
+          <td>
+            {{ cafe["Cafe Name"] }}
+          </td>
+          <td>
+            <a href="{{ cafe['Location']}}">Map Link</a>
+          </td>
+          <td>
+            {{ cafe["Open"] }}
+          </td>
+          <td>
+            {{ cafe["Close"] }}
+          </td>
+          <td>
+            {{ cafe["Coffee"] }}
+          </td>
+          <td>
+            {{ cafe["Wifi"] }}
+          </td>
+          <td>
+            {{ cafe["Power"] }}
+          </td>
+        </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

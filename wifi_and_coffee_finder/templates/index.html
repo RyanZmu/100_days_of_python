@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Coffee and Wi-Fi{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+<style>
+    h1 {
+    color: orange;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row d-flex flex-column justify-content-center align-items-center">
+        <div class="col-6 m-3 d-flex justify-content-center">
+            <img src="static/images/coffee-cup.png">
+            <h1>Coffee & Wi-Fi</h1>
+            <img src="static/images/laptop.png">
+        </div>
+        <div class="col-6 m-3 d-flex flex-column justify-content-center">
+            <p class="text-center">Want to work in a café but need power and coffee?</p>
+            <hr>
+            <p class="text-center">We found the right place! Checkout this selection of cafés with good Wi-Fi and good coffee!</p>
+        </div>
+        <div class="col-3 m-3 d-flex justify-content-center">
+            <a class="btn btn-primary" href="{{ url_for('cafes') }}">Show Me</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
