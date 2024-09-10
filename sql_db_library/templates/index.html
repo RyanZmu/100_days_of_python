@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} My Library {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>My Library</h1>
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
+                {% for book in books %}
+                    <li class="list-group-item"><a href="{{ url_for('delete_book', id=book.id) }}">Delete</a>{{ book.title }} - {{ book.author }} - {{ book.rating }}<a href="{{ url_for('edit_book', id=book.id) }}">Edit</a></li>
+                {% endfor %}
+            </ul>
+<!--            <h3>No Books In Library... Add Some!</h3>-->
+        </div>
+    </div>
+    <a href="{{ url_for('add_book') }}">Add New Book</a>
+</div>
+{% endblock %}
