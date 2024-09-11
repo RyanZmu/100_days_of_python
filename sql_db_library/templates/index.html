@@ -9,7 +9,7 @@
         <div class="col">
             <ul class="list-group">
                 {% for book in books %}
-                    <li class="list-group-item"><a href="{{ url_for('delete_book', id=book.id) }}">Delete</a>{{ book.title }} - {{ book.author }} - {{ book.rating }}<a href="{{ url_for('edit_book', id=book.id) }}">Edit</a></li>
+                    <li class="list-group-item">{{ book.title }} - {{ book.author }} - {{ book.rating }} <a href="{{ url_for('edit_book', id=book.id) }}">Edit</a> <a href="{{ url_for('delete_book', id=book.id) }}">Delete</a></li>
                 {% endfor %}
             </ul>
 <!--            <h3>No Books In Library... Add Some!</h3>-->
