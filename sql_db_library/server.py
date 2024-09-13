@@ -38,10 +38,10 @@ class Books(db.Model):
 with app.app_context():
     db.create_all()
 
-# Only need if instance does not already exist
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new-books-collection-db.db"
-# init app with extension
-# db.init_app(app)
+# # Only need if instance does not already exist
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///new-books-collection-db.db"
+# # init app with extension
+# # db.init_app(app)
 
 # Config app for CSFR with a secret key
 app.config["SECRET_KEY"] = SECRET_KEY

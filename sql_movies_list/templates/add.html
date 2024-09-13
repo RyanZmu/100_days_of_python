@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+
+{% block title %} Add New Movie {% endblock %}
+
+{% block content %}
+<div class="col d-flex flex-column align-items-center justify-items-center justify-content-center">
+  <h1>Add a new movie to the list!</h1>
+  {% if form is defined %}
+  {{ render_form(form) }}
+  {% endif %}
+</div>
+
+{% if movie_list | length > 1 %}
+<div class="col">
+  <h1>Select a Movie</h1>
+  <ul>
+  {% for movie in movie_list %}
+  <li><a href="{{ url_for('add_movie', id=movie.id) }}">{{ movie.title }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+
+{% endif %}
+
+{% endblock %}

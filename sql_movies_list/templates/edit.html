@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+
+{% block title %} Edit Movie {% endblock %}
+
+{% block content %}
+<div class="col d-flex flex-column align-items-center justify-items-center justify-content-center">
+  {% block header %}Change Rating and Review here!{% endblock %}
+  {{ render_form(form) }}
+</div>
+
+{% endblock %}
