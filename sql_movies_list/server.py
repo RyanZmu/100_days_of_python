@@ -47,16 +47,16 @@ with app.app_context():
     db.create_all()
 
 # Create an initial DB entry
-new_movie = Movie(
-    title="Cars",
-    year="2006",
-    description="On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown "
-                "town and learns that winning isn't everything in life.",
-    rating=8.3,
-    ranking=3,
-    review="Cars go VROOOM",
-    img_url="https://image.tmdb.org/t/p/original/eN0OtsqjwA88c9lECa9RldJeW3w.jpg"
-)
+# new_movie = Movie(
+#     title="Cars",
+#     year="2006",
+#     description="On the way to the biggest race of his life, a hotshot rookie race car gets stranded in a rundown "
+#                 "town and learns that winning isn't everything in life.",
+#     rating=8.3,
+#     ranking=3,
+#     review="Cars go VROOOM",
+#     img_url="https://image.tmdb.org/t/p/original/eN0OtsqjwA88c9lECa9RldJeW3w.jpg"
+# )
 
 # with app.app_context():
 #     db.session.add(new_movie)
@@ -81,7 +81,6 @@ def home():
     highest_rating = 0.0
 
     for movie in movies_sort_by_rank:
-        # print(movie)
         if movie.rating > highest_rating:
             highest_rating = movie.rating
             highest_rank -= 1
