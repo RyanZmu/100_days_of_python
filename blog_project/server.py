@@ -1,22 +1,23 @@
 from __future__ import annotations
+import hashlib
+from urllib.parse import urlencode
+from os import environ
 from typing import List
-
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from flask_bootstrap import Bootstrap5
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Integer, String, Float, exc, ForeignKey
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from dotenv import load_dotenv
 import os
 import smtplib
-from forms import NewPost, LoginForm, RegisterForm, CommentForm
 from flask import Flask
 from flask_wtf.csrf import CSRFProtect
 from flask_ckeditor import CKEditor
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask_login import login_user, LoginManager, login_required, current_user, logout_user
+from forms import NewPost, LoginForm, RegisterForm, CommentForm
+from database import db, User, BlogPosts, Comment
 
+# Load environment vars
 load_dotenv()
 
 PASSWORD = os.environ.get("EMAIL_PASSWORD")
@@ -26,81 +27,42 @@ HOST = "smtp.gmail.com"
 
 app = Flask(__name__)
 
+# Load ckeditor
 ckeditor = CKEditor(app)
 
-# Enable CSRF
-csrf = CSRFProtect(app)
-# Config app for CSFR with a secret key
-app.config["SECRET_KEY"] = SECRET_KEY
-# Add app's secret key
-app.secret_key = os.environ.get("APP_SECRET_KEY")
-
-# DB
-class Base(DeclarativeBase):
-    pass
-
-
-db = SQLAlchemy(model_class=Base)
-
-class User(db.Model, UserMixin):
-    __tablename__ = "users"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    email: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(String(255), nullable=False)
-    username: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
-    # This will act like a List of BlogPost objects attached to each User.
-    # Every User class will have a posts list
-    posts = relationship("BlogPosts", back_populates="author")
-    comments = relationship("Comment", back_populates="author")
-
-class BlogPosts(db.Model):
-    __tablename__ = "blog_posts"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    # Create Foreign Key, user.id that refers to User table - ties the value of author_id to the User.id
-    author_id: Mapped[int] = mapped_column(Integer, ForeignKey(column="users.id"))
-    title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
-    date: Mapped[str] = mapped_column(String(255), nullable=False)
-    body: Mapped[str] = mapped_column(String(255), nullable=False)
-    img_url: Mapped[str] = mapped_column(String(255), nullable=False)
-    subtitle: Mapped[str] = mapped_column(String(255), nullable=False)
-    # Create ref to the User object. the posts refers to the posts property of User class
-    author = relationship("User", back_populates="posts")
-    # Holds all comments for this post
-    post_comments = relationship("Comment", back_populates="parent_post")
-
-class Comment(db.Model):
-    __tablename__ = "comments"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    author_id: Mapped[int] = mapped_column(Integer, ForeignKey(column="users.id"))
-    post_id: Mapped[int] = mapped_column(Integer, ForeignKey("blog_posts.id"))
-    comment_body: Mapped[str] = mapped_column(String(255), nullable=False)
-    author = relationship("User", back_populates="comments")
-    parent_post = relationship("BlogPosts", back_populates="post_comments")
-
-
-
+# Load DB
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///posts.db"
 # init app with extension
 db.init_app(app)
 
-# Create the tables
+# Create the db tables
 with app.app_context():
     db.create_all()
 
-# init Bootstrap5 for Flask
+# Enable CSRF for flask forms
+csrf = CSRFProtect(app)
+# Config app for CSFR with a secret key
+app.config["SECRET_KEY"] = SECRET_KEY
+app.secret_key = os.environ.get("APP_SECRET_KEY")
+
+# Load bootstrap
 bootstrap = Bootstrap5(app)
 
-# Login manager
+# Load login manager
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+# # Admin decorator - make a decorator instead of adding or current_user.id == 1 to functions
+# def admin_only():
+#     def inner():
+#         if current_user.id == 1:
+#     return inner
 
 @login_manager.user_loader
 def load_user(user_id):
     return db.get_or_404(User, user_id)
 
+# Post Routes
 @app.route("/")
 def get_blog():
     all_blog_posts = db.session.execute(db.select(BlogPosts)).scalars().all()
@@ -134,7 +96,8 @@ def get_blog_post(post_id):
     return render_template(
         template_name_or_list="post.html",
         post=post_to_display,
-        comment_form=comment_form)
+        comment_form=comment_form,
+    )
 
 
 @app.route("/new-post", methods=["GET", "POST"])
@@ -170,48 +133,48 @@ def new_post():
 def edit_post(post_id):
     post_to_edit = db.get_or_404(BlogPosts, post_id)
 
-    edit_form = NewPost(
-        title=post_to_edit.title,
-        date=post_to_edit.date,
-        body=post_to_edit.body,
-        img_url=post_to_edit.img_url,
-        subtitle=post_to_edit.subtitle,
-    )
+    # Confirm user is the post's author before edit
+    if current_user.is_authenticated and current_user.id == post_to_edit.author.id or current_user.id == 1:
+        edit_form = NewPost(
+            title=post_to_edit.title,
+            date=post_to_edit.date,
+            body=post_to_edit.body,
+            img_url=post_to_edit.img_url,
+            subtitle=post_to_edit.subtitle,
+        )
 
-    if edit_form.validate_on_submit():
-        post_to_edit.title = edit_form.data.get("title")
-        post_to_edit.body = edit_form.data.get("body")
-        post_to_edit.img_url = edit_form.data.get("img_url")
-        post_to_edit.subtitle = edit_form.data.get("subtitle")
+        if edit_form.validate_on_submit():
+            post_to_edit.title = edit_form.data.get("title")
+            post_to_edit.body = edit_form.data.get("body")
+            post_to_edit.img_url = edit_form.data.get("img_url")
+            post_to_edit.subtitle = edit_form.data.get("subtitle")
 
-        db.session.commit()
-        return redirect(url_for("get_blog_post", post_id=post_to_edit.id))
+            db.session.commit()
+            return redirect(url_for("get_blog_post", post_id=post_to_edit.id))
 
-    return render_template("forms.html", form=edit_form, post_id=post_to_edit.id)
-
-
-# def admin_only():
-#     def inner(current_user):
-#         if current_user.id != 1:
-#             abort(403)
-#     return inner
+        return render_template("forms.html", form=edit_form, post_id=post_to_edit.id)
+    else:
+        # If user is not the post's author, return forbidden
+        abort(403)
 
 
 @app.route("/delete/<post_id>", methods=["GET"])
 @login_required
 def delete_post(post_id):
     # Delete the blogpost AND comments associated with blogpost
-    db.session.execute(db.delete(Comment).where(Comment.post_id == post_id))
-    db.session.execute(db.delete(BlogPosts).where(BlogPosts.id == post_id))
-    db.session.commit()
+    # Get post author id and confirm logged-in user is the author before deleting
+    post = db.get_or_404(BlogPosts, post_id)
+    if current_user.is_authenticated and current_user.id == post.author.id or current_user.id == 1:
+        db.session.execute(db.delete(Comment).where(Comment.post_id == post_id))
+        db.session.execute(db.delete(BlogPosts).where(BlogPosts.id == post_id))
+        db.session.commit()
+    else:
+        # If user is not the post's author, return forbidden
+        abort(403)
     return redirect(url_for("get_blog"))
 
 
-@app.route(rule="/about")
-def get_about():
-    return render_template("about.html")
-
-
+# Login Routes
 @app.route(rule="/login", methods=["GET", "POST"])
 def login_form():
     form = LoginForm()
@@ -237,15 +200,17 @@ def logout():
     logout_user()
     return redirect(url_for("get_blog"))
 
-
 @app.route("/register", methods=["GET", "POST"])
 def register_user():
     form = RegisterForm()
 
     if form.validate_on_submit():
+        email_encoded = form.data.get("email").lower().encode('utf-8')
+        # Email hash to request an Avatar from Gravatar
         # noinspection PyArgumentList
         new_user = User(
             email=form.data.get("email"),
+            email_hash=hashlib.sha256(email_encoded).hexdigest(),
             password=generate_password_hash(form.data.get("password"), method="scrypt", salt_length=10),
             username=form.data.get("username")
         )
@@ -262,6 +227,11 @@ def register_user():
 
     return render_template(template_name_or_list="forms.html", form=form)
 
+
+# Misc routes
+@app.route(rule="/about")
+def get_about():
+    return render_template("about.html")
 
 @app.route(rule="/contact", methods=["POST", "GET"])
 # @admin_only

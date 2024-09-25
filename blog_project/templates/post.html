@@ -16,7 +16,7 @@
                 {{ post["date"] }}
                 <!-- Add SAFE to render ckeditor body -->
                 <br>
-                Posted By: <em>{{ post["author"].username }}</em>
+                Posted By: <img src="https://gravatar.com/avatar/{{ post['author'].email_hash }}?d=retro&s=40" alt=""> <em>{{ post["author"].username }}</em>
                 </p>
                 <div class="mt-5">
                     {{ post["body"] | safe }}
@@ -24,7 +24,7 @@
 
                 <!-- Buttons for edit and back -->
                 <div class="col d-flex mb-5 mt-5">
-                    {% if current_user.is_authenticated and current_user.id == post["author_id"] %}
+                    {% if current_user.is_authenticated and current_user.id == post["author_id"] or current_user.id == 1 %}
                         <a class="btn bg-success text-white m-1" href="{{ url_for('edit_post', post_id=post['id']) }}">Edit</a>
                     {% endif %}
                     <a class="btn bg-success text-white m-1" href="{{ url_for('get_blog') }}">Back</a>
@@ -40,7 +40,10 @@
                 <h3 class="m-3">Comments</h3>
                 {% for comment in post["post_comments"] %}
                 <div class="col-4 m-3 d-flex flex-column justify-contents-center align-items-center border border-success-subtle comment">
-                    <p><strong>{{ comment["author"].username }}</strong></p>
+                    <p>
+                        <img src="https://gravatar.com/avatar/{{ comment['author'].email_hash }}?d=retro&s=40" alt="">
+                        <strong>{{ comment["author"].username }}</strong>
+                    </p>
                     {{ comment["comment_body"] | safe }}
                 </div>
                 {% endfor %}

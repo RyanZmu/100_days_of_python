@@ -13,21 +13,12 @@ nav {
 }
 
 .create-post {
-    background-color: #45474B !important;
-    color: #F5F7F8 !important;
+    background-color: #d3d3d3 !important;
 }
 
 .post {
-    background-color: #45474B !important;
+    background-color: #d3d3d3 !important;
     color: black !important;
-}
-
-.post h1 {
-    color: #F5F7F8 !important;
-}
-
-.post p {
-    color: #F5F7F8 !important;
 }
 
 .banner {

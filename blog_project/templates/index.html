@@ -12,6 +12,13 @@
     <img src="/static/images/hand.png" class="w-25 opacity-75">
 </div>
     <div class="container-fluid">
+            {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
         <div class="row d-flex justify-content-center align-items-center flex-column">
             <div class="col-8 card-container my-5 p-2">
                 {% for post in posts %}
@@ -24,14 +31,14 @@
                             <hr>
                             <div class="card-body">
                                 <p>
-                                By: <strong><em>{{ post["author"].username }}</em></strong>
+                                By: <img src="https://gravatar.com/avatar/{{ post['author'].email_hash }}?d=retro&s=40" alt=""> <strong><em>{{ post["author"].username }}</em></strong>
                                 <br>
                                 {{ post["subtitle"] }}
                                 </p>
                             </div>
                         </div>
                         <div class="col-1 d-flex flex-column">
-                            {% if current_user.is_authenticated and current_user.id == post["author_id"] %}
+                            {% if current_user.is_authenticated and current_user.id == post["author_id"] or current_user.id == 1%}
                                 <a class="btn bg-danger text-white" href="{{ url_for('delete_post', post_id=post['id']) }}">Delete</a>
                             {% endif %}
                         </div>
